@@ -21,6 +21,7 @@ import NotExist from './components/authentication/NotExist';
 import Inscrit from './components/authentication/Inscrit';
 import BadAuthentication from './components/authentication/BadAuthentication';
 import NotAuthorized from './components/authentication/NotAuthorized';
+import InfoModifier from './components/parametres/InfoModifier';
 //import { isLoginService } from './service/service';
 //import withAuthorization from './service/withAuthorization';
 
@@ -97,7 +98,8 @@ function App() {
           <Route path="/badAuthentication" element={<BadAuthentication />}></Route>
           <Route path="/notAuthorized" element={<NotAuthorized />}></Route>
           <Route path="*" element={<NotExist />}></Route>
-          <Route path="/modifieNotif" element={<ModifierUser/>}></Route>
+          <Route path="/modifieNotif" element={<ModifierUser />}></Route>
+          <Route path="/infoModifier" element={<InfoModifier />}></Route>
         </Routes>
         <h6>By High-Computing</h6>
         <p>32 rue Chaillon, Villeneuve la Garenne</p>

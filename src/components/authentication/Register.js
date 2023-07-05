@@ -26,11 +26,9 @@ function Register() {
         registerService(data)
           .then((dataResponse) => {
             if (dataResponse.token === "error") {
-              //setData(data);
               navigate(`/badAuthentication`);
             }
             else {
-              //setData(data);
               dispatch(setUser(dataResponse));
               navigate(`/inscrit`);
             }

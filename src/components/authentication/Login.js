@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-//import { setUser } from '../../redux/reducers/userReducer';
-//import axios from 'axios';
 import { authenticationService } from '../../service/service';
 import { setToken } from '../../redux/reducers/userReducer';
 
@@ -14,7 +12,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
 
-  //const user = { name : 'Test User', email : 'kk@gmail.com' };
 
 
   const handleSignup = () => {
@@ -23,11 +20,9 @@ const Login = () => {
     authenticationService(loginUser)
       .then((data) => {
         if (data.token === "error") {
-          //setData(data);
           navigate(`/badAuthentication`);
         }
         else {
-          //setData(data);
           dispatch(setToken(data.token));
           navigate(`/home`);
         }
@@ -36,11 +31,6 @@ const Login = () => {
   };
 
   useEffect(() => {
-    // Récupérer les informations utilisateur depuis le backend
-
-
-    // Sauvegarder l'utilisateur dans Redux
-    //dispatch(setUser(user));
   }, [dispatch]);
   let userFromState = useSelector((state) => state.user);
 
@@ -64,6 +54,7 @@ const Login = () => {
               <tr>
                 <td>Mot de Passe</td>
                 <td><input
+                  type="password"
                   className="form-control"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}

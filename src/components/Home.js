@@ -41,11 +41,11 @@ function Home() {
           </h6>
           <br /><br /><br /><br />
           <h6>Êtes vous un professionnel dans un domaine?</h6>
-          <h7>Vous pouvez utiliser DocPuting afin de gerer vos rendez-vous avec vos clients. Vous pouvez
+          <p>Vous pouvez utiliser DocPuting afin de gerer vos rendez-vous avec vos clients. Vous pouvez
             libérer du temps avec une gestion de vos rendez-vous beaucoup plus rapide et moderne.
             Vous pouvez améliorer l'accès à votre pratique professionnel quelle que soit le métier
             et ainsi gagner en confort de travail.
-          </h7>
+          </p>
         </div>
       </div>
     </div>

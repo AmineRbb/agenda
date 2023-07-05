@@ -1,47 +1,46 @@
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { parametrerUserService } from '../../service/service';
 
 function ModifierUser() {
     const [data, setData] = useState(null);
+  const navigate = useNavigate();
+  const token = useSelector((state) => {
+    var tmpToken = state.user.token;
+    return tmpToken;
+  }
+  );
 
-    useEffect(() => {
-        // Récupérer le JWT de l'utilisateur connecté depuis le stockage local (localStorage)
-        const token =
-            'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODc1MzMyNjUsImV4cCI6MTY4NzUzNDcwNX0.du9gOplcDlMOCZeCUbC3wOGAAHRNSoEy-NyQuZXL_oY';
+  if (token !== "notlogin") {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    //axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    //axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
+    parametrerUserService(headers)
+      .then((response) => {
+        setData(response);
+      })
+  }
+  else {
+    navigate(`/login`);
+  }
 
-        // Vérifier si un JWT est présent
-        if (token) {
-            // Ajouter le JWT à l'en-tête Authorization
-            const headers = {
-                Authorization: `Bearer ${token}`,
-            };
+  const handleModif = () => {
+    navigate(`/infoModifier`);
+  }
 
-
-            //axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            //axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
-
-
-            axios
-                .get('http://localhost:8083/api/v1/main/modifInfo', { headers })
-                .then(response => {
-                    // Récupérer les données renvoyées par le backend
-                    setData(response.data);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        }
-    }, []);
 
     return (
         <div className="card">
             <div className="card-body">
                 
                 {data ? (
-                    <h6>
-                        <h3 className="text-center">Mofifier les Informations Utilisateur de {data.email} </h3>
+                    <div>
+                        <h3 className="text-center">Modifier les Informations Utilisateur de {data.email} </h3>
                         <table className="table table-light">
                             <tbody>
                                 <tr>
@@ -107,9 +106,14 @@ function ModifierUser() {
                             </tbody>
                         </table>
 
-                        <h6> Modifier Les informations utilisateur <button className="btn btn-outline-secondary">
+                        <div><h6> Modifier Les informations utilisateur </h6>
+                            <button 
+                            onClick={handleModif}
+                            className="btn btn-outline-secondary">
                             <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
-                        </button></h6></h6>
+                        </button>
+                        </div>
+                        </div>
                 ) : (<p>Chargement des données ...</p>)}
             </div>
         </div>

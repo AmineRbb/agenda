@@ -1,29 +1,4 @@
 import axios from "axios";
-//import { useSelector } from "react-redux";
-//import { useState } from "react";
-
-/*export const authenticationService = async (loginUser) => {
-  try {
-    const response = await axios.post('http://localhost:8083/api/v1/auth/authenticate', { loginUser });
-
-    if (response.status === 403) {
-      const updatedData = {
-        ...response.data,
-        token: "error"
-      };
-      return updatedData;
-    } else {
-      return response.data;
-    }
-  } catch (error) {
-    console.error(error);
-    const updatedData = {
-      token: "error"
-    };
-    return updatedData;
-    throw error;
-  }
-};*/
 
 export const authenticationService = async (loginUser) => {
   try {
@@ -49,22 +24,20 @@ export const registerService = async (registerUser) => {
       token: "error"
     };
     return updatedData;
-    //throw error;
   }
 };
 
 
-export const parametrerUserService = async (paramUser) => {
+export const parametrerUserService = async (param) => {
   try {
-    const response = await axios.post('http://localhost:8083/api/v1/main/modifInfo', paramUser);
+    const response = await axios.get('http://localhost:8083/api/v1/main/modifInfo', {headers:param});
     return response.data;
   } catch (error) {
     console.error(error);
     const updatedData = {
-      token: "error"
+      pageReturn: "error"
     };
     return updatedData;
-    //throw error;
   }
 };
 
@@ -74,7 +47,6 @@ export const parametrerUserService = async (paramUser) => {
  *  appelé pour parametrer User
  */
 export const ajouterRoleService = async (headers, dto) => {
-  //const [data, setData] = useState(null);
   try {
     const response = await axios.post('http://localhost:8083/api/v1/admin/addRoleUtilisateur', dto, {headers});
     return response.data;
@@ -84,7 +56,6 @@ export const ajouterRoleService = async (headers, dto) => {
       booleanPage: "false"
     };
     return updatedData;
-    //throw error;
   }
 }
 
@@ -92,7 +63,6 @@ export const ajouterRoleService = async (headers, dto) => {
  *  appelé pour parametrer User
  */
 export const supprimerRoleService = async (headers, dto) => {
-  //const [data, setData] = useState(null);
   try {
     const response = await axios.post('http://localhost:8083/api/v1/admin/removeRoleUtilisateur', dto, {headers});
     return response.data;
@@ -102,7 +72,6 @@ export const supprimerRoleService = async (headers, dto) => {
       booleanPage: "false"
     };
     return updatedData;
-    //throw error;
   }
   
 }
@@ -111,7 +80,6 @@ export const supprimerRoleService = async (headers, dto) => {
  *  appelé pour parametrer User
  */
 export const supprimerUtilisateurService = async (headers, dto) => {
-  //const [data, setData] = useState(null);
   try {
     const response = await axios.post('http://localhost:8083/api/v1/admin/deleteUtilisateur', dto, {headers});
     return response.data;
@@ -121,7 +89,6 @@ export const supprimerUtilisateurService = async (headers, dto) => {
       booleanPage: "false"
     };
     return updatedData;
-    //throw error;
   }
 }
 
@@ -129,7 +96,6 @@ export const supprimerUtilisateurService = async (headers, dto) => {
  *  appelé pour parametrer User
  */
 export const verificationMdpService = async (verifMdp) => {
-  //const [data, setData] = useState(null);
   try {
     const response = await axios.post('http://localhost:8083/api/v1/main/modifInfo', verifMdp);
     return response.data;
