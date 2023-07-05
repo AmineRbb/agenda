@@ -3,41 +3,44 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from '../../redux/reducers/userReducer';
-import axios from 'axios';
+//import { setUser } from '../../redux/reducers/userReducer';
+//import axios from 'axios';
+import { authenticationService } from '../../service/service';
+import { setToken, setUser } from '../../redux/reducers/userReducer';
 
 const Login = () => {
-  const navigate= useNavigate();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [data, setData] = useState(null);
   const dispatch = useDispatch();
 
   //const user = { name : 'Test User', email : 'kk@gmail.com' };
 
 
   const handleSignup = () => {
-    const loginUser = { email: email, password : password };
+    const loginUser = { email: email, password: password };
 
-    axios
-        .post('http://localhost:8083/api/v1/auth/authenticate', { loginUser })
-        .then(response => {
-          // Récupérer les données renvoyées par le backend
-          setData(response.data);
-          console.log("on obtient ", response.data);
-          dispatch(setData(data)); // TODO modifier data en user
-        })
-        .catch(error => {
-          console.error(error);
-        });
+    authenticationService(loginUser)
+      .then((data) => {
+        if (data.token === "error") {
+          //setData(data);
+          navigate(`/badAuthentication`);
+        }
+        else {
+          //setData(data);
+          dispatch(setToken(data.token));
+          navigate(`/home`);
+        }
+      })
+
   };
 
   useEffect(() => {
     // Récupérer les informations utilisateur depuis le backend
-    
+
 
     // Sauvegarder l'utilisateur dans Redux
-//    dispatch(setUser(user));
+    //dispatch(setUser(user));
   }, [dispatch]);
   let userFromState = useSelector((state) => state.user);
 
@@ -68,9 +71,14 @@ const Login = () => {
               </tr>
             </tbody>
           </table>
-          <h6 className="text-center"><button className="btn btn-success" style={{ marginRight: '10px', marginTop: '5px' }}>
-            <FontAwesomeIcon icon={faCircleCheck}></FontAwesomeIcon> Connexion
-          </button></h6>
+          <h6 className="text-center">
+            <button
+              onClick={handleSignup}
+              className="btn btn-success"
+              style={{ marginRight: '10px', marginTop: '5px' }}
+            >
+              <FontAwesomeIcon icon={faCircleCheck}></FontAwesomeIcon> Connexion
+            </button></h6>
 
           <div className="card">
             <div className="card-body bg-light">

@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+//import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { parametrerUserService } from '../../service/service';
+import { useSelector } from 'react-redux';
 
 
 function ParametrerUser() {
   const [data, setData] = useState(null);
   const navigate= useNavigate();
+  const token = useSelector((state) => {
+    var tmpToken = state.user.token;
+    return tmpToken;
+    }
+  );
 
-  useEffect(() => {
+  //useEffect(() => {
     // Récupérer le JWT de l'utilisateur connecté depuis le stockage local (localStorage)
-    const token =
-      'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODc1MzMyNjUsImV4cCI6MTY4NzUzNDcwNX0.du9gOplcDlMOCZeCUbC3wOGAAHRNSoEy-NyQuZXL_oY';
+    
+      //'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODgzNzM4MDUsImV4cCI6MTY4ODM3NTI0NX0.7QsasHYugChCEGPrmzlQiKAyi0aubXRAmzjD3SKJwKE';
 
     // Vérifier si un JWT est présent
-    if (token) {
+    if (token!=="notlogin") {
       // Ajouter le JWT à l'en-tête Authorization
       const headers = {
         Authorization: `Bearer ${token}`,
@@ -24,9 +31,13 @@ function ParametrerUser() {
       
       //axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       //axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
+      parametrerUserService(headers)
+      .then((response) => {
+          setData(response);
 
+      })
 
-      axios
+      /*axios
         .get('http://localhost:8083/api/v1/main/modifInfo', { headers })
         .then(response => {
           // Récupérer les données renvoyées par le backend
@@ -34,9 +45,12 @@ function ParametrerUser() {
         })
         .catch(error => {
           console.error(error);
-        });
+        });*/
     }
-  }, []);
+    else {
+      navigate(`/login`);
+    }
+ // }, []);
 
   
 

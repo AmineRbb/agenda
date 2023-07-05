@@ -2,13 +2,52 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { supprimerRoleService } from '../../../service/service';
+import { useSelector } from 'react-redux';
 
 function SupprimerRole() {
   const [data, setData] = useState({
     utilisateur:'',
     role:'',
   });
-  const navigate= useNavigate();
+  const navigate = useNavigate();
+ 
+  const token = useSelector((state) => {
+    var tmpToken = state.user.token;
+    return tmpToken;
+  }
+  );
+  if (token === "notlogin") {
+    navigate(`/login`);
+  };
+
+
+  const handleDeleteRole = () => {
+    if (token !== "notlogin") {
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      const dto = { 
+        role : `${data.role}`,
+        userParam : `${data.utilisateur}`
+      }
+
+      supprimerRoleService(headers, dto)
+        .then((response) => {
+          if(response.booleanPage===true){
+            navigate(`/home`);
+            }
+            else{
+              navigate(`/notAuthorized`);
+            }
+
+        })
+    }
+    else {
+      navigate(`/notAuthorized`);
+    }
+  };
+
   return (
     <div className="p-1 m-1">
       <div className="card">
@@ -38,7 +77,7 @@ function SupprimerRole() {
               </tbody>
             </table>
             <h6 className="text-center">
-               <button onClick={() => navigate(`/modifierUser`)} className="btn btn-outline-secondary">
+               <button onClick={handleDeleteRole} className="btn btn-outline-secondary">
           <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon> Soumettre
           </button>
           </h6>

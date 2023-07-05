@@ -4,26 +4,30 @@ export const setUser = (user) => ({
   payload: user,
 });
 
+export const setToken = (token) => ({
+  type: 'SET_TOKEN',
+  payload: token,
+});
+
 const initialState = {
-  user: { 
-    jwt: "",
-    name: "testAM",
-    email:"testAM@gmail.com"
-  }
+  token: "notlogin"
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_USER':
-      let newState = {
+      return {
         ...state,
         user: action.payload,
       };
-      return newState;
+    case 'SET_TOKEN':
+      return {
+        ...state,
+        token: action.payload,
+      };
     default:
       return state;
   }
 };
-
 
 export default userReducer;

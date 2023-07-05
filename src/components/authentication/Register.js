@@ -1,7 +1,10 @@
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { registerService } from '../../service/service';
+import { setUser } from '../../redux/reducers/userReducer';
 
 function Register() {
     const [data, setData] = useState({
@@ -14,7 +17,27 @@ function Register() {
         city: '',
         rolePrincipale: '',
     });
+
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const handleSignup = () => {
+    
+        registerService(data)
+          .then((dataResponse) => {
+            if (dataResponse.token === "error") {
+              //setData(data);
+              navigate(`/badAuthentication`);
+            }
+            else {
+              //setData(data);
+              dispatch(setUser(dataResponse));
+              navigate(`/inscrit`);
+            }
+          })
+    
+      };
+    
     return (
         <div className="card">
             <div className="card-body">
@@ -109,7 +132,7 @@ function Register() {
 
                     <h6 className="text-center">
                         <button
-                            onClick={() => navigate(`/inscrit`)}
+                            onClick={handleSignup}
                             className="btn btn-outline-secondary">
                             <FontAwesomeIcon icon={faCircleCheck}></FontAwesomeIcon> S'inscrire
                         </button></h6></h6>

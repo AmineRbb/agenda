@@ -1,0 +1,39 @@
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+
+const withAuthorization = (allowedRoles) => (WrappedComponent) => {
+
+    const WithAuthorization = (props) => {
+        const adminLink = "/login";
+        const result = isLoginService()
+        const isLogin = result.isLogin;
+        const isAdmin = result.isAdmin;
+        //const userRoles = useSelector((state) => state.user.roles);
+
+        // Vérifier si l'utilisateur a un rôle autorisé
+        if (isLogin === true) {
+            if (isAdmin) {
+                adminLink = "/parametresAdmin";
+            }
+            else {
+                adminLink = "/notAuthorized";
+            }
+        }
+        //const hasPermission = userRoles.some(role => allowedRoles.includes(role));
+
+        if (adminLink==="/login") {
+            // Rediriger vers une page d'erreur ou d'accès refusé
+            return <Navigate to="/login" />;
+        }
+        else if (adminLink==="/notAuthorized") {
+            // Rediriger vers une page d'erreur ou d'accès refusé
+            return <Navigate to="/notAuthorized" />;
+        }
+        // Rendre le composant avec autorisation
+        return <WrappedComponent {...props} />;
+    };
+
+    return WithAuthorization;
+};
+
+export default withAuthorization;

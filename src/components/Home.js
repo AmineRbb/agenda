@@ -34,6 +34,11 @@ function Home() {
           </h6>
           <br />
           <h6>De nombreux spécialistes sont à votre service.</h6>
+          <h6>
+          <img src="businessman.png" alt="Mon Image" style={{ width: '300px', height: '250px' }} />
+          <img src="coatchSport.jpg" alt="Mon Image" style={{ width: '300px', height: '250px' }} />
+          <img src="medecinDessin.png" alt="Mon Image" style={{ width: '300px', height: '250px' }} />
+          </h6>
           <br /><br /><br /><br />
           <h6>Êtes vous un professionnel dans un domaine?</h6>
           <h7>Vous pouvez utiliser DocPuting afin de gerer vos rendez-vous avec vos clients. Vous pouvez

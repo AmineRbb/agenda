@@ -19,11 +19,31 @@ import SupprimerRole from './components/parametres/modificationAdmin/SupprimerRo
 import SupprimerUtilisateur from './components/parametres/modificationAdmin/SupprimerUtilisateur';
 import NotExist from './components/authentication/NotExist';
 import Inscrit from './components/authentication/Inscrit';
+import BadAuthentication from './components/authentication/BadAuthentication';
+import NotAuthorized from './components/authentication/NotAuthorized';
+//import { isLoginService } from './service/service';
+//import withAuthorization from './service/withAuthorization';
 
 
 
 
 function App() {
+  let adminLink="/login";
+ /* const result = isLoginService()
+  const isLogin = result.isLogin;
+  const isAdmin = result.isAdmin;
+  if (isLogin === true) {
+    if (isAdmin) {
+       adminLink = "/parametresAdmin";
+    }
+    else {
+       adminLink = "/notAuthorized";
+    }
+  }
+  //else {
+  //const adminLink = "/login";
+  //}*/
+
   return (
     <BrowserRouter>
       <div>
@@ -51,7 +71,7 @@ function App() {
               <Link to="/parametresUser" className="customamtitle btn btn-outline-info ms-1">Profile</Link>
             </li>
             <li>
-              <Link to="/parametresAdmin" className="customamtitle btn btn-outline-info ms-1">Admin</Link>
+              <Link to={adminLink} className="customamtitle btn btn-outline-info ms-1">Admin</Link>
             </li>
             <li>
               <Link to="/logout" className="customamtitle btn btn-outline-info ms-1">Deconnection</Link>
@@ -74,6 +94,8 @@ function App() {
           <Route path="/admin/supprimerRole" element={<SupprimerRole />}></Route>
           <Route path="/admin/supprimerUtilisateur" element={<SupprimerUtilisateur />}></Route>
           <Route path="/inscrit" element={<Inscrit />}></Route>
+          <Route path="/badAuthentication" element={<BadAuthentication />}></Route>
+          <Route path="/notAuthorized" element={<NotAuthorized />}></Route>
           <Route path="*" element={<NotExist />}></Route>
         </Routes>
         <h6>By High-Computing</h6>
@@ -82,5 +104,5 @@ function App() {
     </BrowserRouter>
   );
 }
-
+ /// {withAuthorization(['admin'])(ParametrerAdmin)} />
 export default App;

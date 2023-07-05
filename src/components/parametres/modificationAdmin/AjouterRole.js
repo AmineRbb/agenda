@@ -1,14 +1,58 @@
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { ajouterRoleService } from '../../../service/service';
 
 function AjouterRole() {
   const [data, setData] = useState({
-    utilisateur:'',
-    role:'',
+    utilisateur: '',
+    role: '',
   });
-  const navigate= useNavigate();
+  const navigate = useNavigate();
+
+  const token = useSelector((state) => {
+    var tmpToken = state.user.token;
+    return tmpToken;
+  }
+  );
+
+  if (token === "notlogin") {
+    navigate(`/login`);
+  };
+
+  const handleAddRole = () => {
+    if (token !== "notlogin") {
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      const dto = { 
+        role : `${data.role}`,
+        userParam : `${data.utilisateur}`
+      }
+
+      ajouterRoleService(headers, dto)
+        .then((response) => {
+          if(response.booleanPage===true){
+          navigate(`/home`);
+          }
+          else{
+            navigate(`/notAuthorized`);
+          }
+
+        })
+    }
+    else {
+      navigate(`/notAuthorized`);
+    }
+  };
+
+
+  
+
+
+
   return (
     <div className="p-1 m-1">
       <div className="card">
@@ -38,10 +82,10 @@ function AjouterRole() {
               </tbody>
             </table>
             <h6 className="text-center">
-               <button onClick={() => navigate(`/modifierUser`)} className="btn btn-outline-secondary">
-          <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon> Soumettre
-          </button>
-          </h6>
+              <button onClick={handleAddRole} className="btn btn-outline-secondary">
+                <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon> Soumettre
+              </button>
+            </h6>
           </h6>
         </div>
       </div>
