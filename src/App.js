@@ -97,7 +97,7 @@ function App() {
           <Route path="/badAuthentication" element={<BadAuthentication />}></Route>
           <Route path="/notAuthorized" element={<NotAuthorized />}></Route>
           <Route path="*" element={<NotExist />}></Route>
-          <Route path="/modifieNotif" element={<ModifieNotif />}></Route>
+          <Route path="/modifieNotif" element={<ModifierUser/>}></Route>
         </Routes>
         <h6>By High-Computing</h6>
         <p>32 rue Chaillon, Villeneuve la Garenne</p>
