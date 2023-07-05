@@ -28,7 +28,7 @@ import NotAuthorized from './components/authentication/NotAuthorized';
 
 
 function App() {
-  let adminLink="/login";
+  let adminLink="/parametresAdmin";
  /* const result = isLoginService()
   const isLogin = result.isLogin;
   const isAdmin = result.isAdmin;
@@ -97,6 +97,7 @@ function App() {
           <Route path="/badAuthentication" element={<BadAuthentication />}></Route>
           <Route path="/notAuthorized" element={<NotAuthorized />}></Route>
           <Route path="*" element={<NotExist />}></Route>
+          <Route path="/modifieNotif" element={<ModifieNotif />}></Route>
         </Routes>
         <h6>By High-Computing</h6>
         <p>32 rue Chaillon, Villeneuve la Garenne</p>

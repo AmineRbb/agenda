@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 //import { setUser } from '../../redux/reducers/userReducer';
 //import axios from 'axios';
 import { authenticationService } from '../../service/service';
-import { setToken, setUser } from '../../redux/reducers/userReducer';
+import { setToken } from '../../redux/reducers/userReducer';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -87,7 +87,7 @@ const Login = () => {
                 </h6>
                 <h6 className="text-center">
                   <button
-                    onClick={handleSignup}
+                    onClick={() => navigate(`/register`)}
                     className="btn btn-outline-secondary"
                     style={{ marginRight: '10px', marginTop: '5px' }}
                   >

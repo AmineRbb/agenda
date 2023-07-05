@@ -15,9 +15,9 @@ function SupprimerUtilisateur() {
     return tmpToken;
   }
   );
-  if (token === "notlogin") {
+  /*if (token === "notlogin") {
     navigate(`/login`);
-  };
+  };*/
 
 
   const handleDeleteUser = () => {
@@ -35,7 +35,7 @@ function SupprimerUtilisateur() {
             navigate(`/home`);
             }
             else{
-              navigate(`/notAuthorized`);
+              navigate(`/modifieNotif`);
             }
 
         })

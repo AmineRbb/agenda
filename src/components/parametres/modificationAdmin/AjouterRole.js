@@ -18,9 +18,9 @@ function AjouterRole() {
   }
   );
 
-  if (token === "notlogin") {
+  /*if (token === "notlogin") {
     navigate(`/login`);
-  };
+  };*/
 
   const handleAddRole = () => {
     if (token !== "notlogin") {
@@ -38,7 +38,7 @@ function AjouterRole() {
           navigate(`/home`);
           }
           else{
-            navigate(`/notAuthorized`);
+            navigate(`/modifieNotif`);
           }
 
         })
@@ -73,7 +73,6 @@ function AjouterRole() {
                 <tr>
                   <td>Role</td>
                   < td><input
-                    type="password"
                     value={data.role}
                     className="form-control"
                     onChange={(e) => setData({ ...data, role: e.target.value })}

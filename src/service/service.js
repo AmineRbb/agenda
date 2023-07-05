@@ -1,4 +1,5 @@
 import axios from "axios";
+//import { useSelector } from "react-redux";
 //import { useState } from "react";
 
 /*export const authenticationService = async (loginUser) => {
@@ -133,9 +134,10 @@ export const verificationMdpService = async (verifMdp) => {
     throw error;
   }
 }
-
+/*
 export const isLoginService = async () => {
-  const token = useSelector((state) => state.user.token);
+  const user = useSelector((state) => state.user);
+  const token = user.token;
   const returnable = {
     isLogin:"false",
     isAdmin:false
@@ -153,4 +155,4 @@ export const isLoginService = async () => {
     console.error(error);
     return returnable
   }
-}
+}*/

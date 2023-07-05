@@ -17,9 +17,9 @@ function SupprimerRole() {
     return tmpToken;
   }
   );
-  if (token === "notlogin") {
+  /*if (token === "notlogin") {
     navigate(`/login`);
-  };
+  };*/
 
 
   const handleDeleteRole = () => {
@@ -38,7 +38,7 @@ function SupprimerRole() {
             navigate(`/home`);
             }
             else{
-              navigate(`/notAuthorized`);
+              navigate(`/modifieNotif`);
             }
 
         })
@@ -68,7 +68,6 @@ function SupprimerRole() {
                 <tr>
                   <td>Role</td>
                   < td><input
-                    type="password"
                     value={data.role}
                     className="form-control"
                     onChange={(e) => setData({ ...data, role: e.target.value })}
