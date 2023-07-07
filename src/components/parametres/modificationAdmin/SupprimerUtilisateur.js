@@ -10,11 +10,12 @@ function SupprimerUtilisateur() {
     utilisateur:'',
   });
   const navigate= useNavigate();
-  const token = useSelector((state) => {
-    var tmpToken = state.user.token;
-    return tmpToken;
-  }
-  );
+  const token = localStorage["agendaToken"]; 
+  //const token = useSelector((state) => {
+  //  var tmpToken = state.user.token;
+  //  return tmpToken;
+  //}
+  //);
   /*if (token === "notlogin") {
     navigate(`/login`);
   };*/
@@ -51,7 +52,7 @@ function SupprimerUtilisateur() {
         <div className="card-body">
           <h3 className="text-center"> Supprimer un Utilisateur :</h3>
           <h6 className="text-center"> Veuilliez choisir l'utilisateur de votre choix.</h6>
-          <h6>
+          <div>
             <table className="table table-light">
               <tbody>
                 <tr>
@@ -69,7 +70,7 @@ function SupprimerUtilisateur() {
           <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon> Soumettre
           </button>
           </h6>
-          </h6>
+          </div>
         </div>
       </div>
     </div>

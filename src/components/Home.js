@@ -1,4 +1,4 @@
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import { useState } from 'react';
@@ -22,14 +22,8 @@ function Home() {
           <h6>Trouver un rendez-vous avec un professionnel.</h6>
           <br />
           <h6 className="d-flex align-items-center">
-            <input
-              value={data.utilisateur}
-              className="form-control me-2"
-              onChange={(e) => setData({ ...data, utilisateur: e.target.value })}
-              style={{ maxWidth: '350px' }}
-            ></input>
-            <button onClick={() => navigate(`/modifierUser`)} className="btn btn-outline-secondary">
-              <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
+            <button onClick={() => navigate(`/reserverRdv`)} className="btn btn-outline-secondary">Trouver un Rendez-Vous
+              <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon>
             </button>
           </h6>
           <br />
@@ -53,3 +47,10 @@ function Home() {
 }
 
 export default Home
+
+/*<input
+              value={data.utilisateur}
+              className="form-control me-2"
+              onChange={(e) => setData({ ...data, utilisateur: e.target.value })}
+              style={{ maxWidth: '350px' }}
+            ></input>*/

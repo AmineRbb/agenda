@@ -10,7 +10,8 @@ export const setToken = (token) => ({
 });
 
 const initialState = {
-  token: "notlogin"
+  token: "notlogin",
+  user: {}
 };
 
 const userReducer = (state = initialState, action) => {

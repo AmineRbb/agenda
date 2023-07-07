@@ -4,6 +4,7 @@ import rootReducer from './reducers/indexRedux';
 
 const store = configureStore({
   reducer: rootReducer,
+  devTools: true
 });
 
 export default store;

@@ -23,7 +23,8 @@ const Login = () => {
           navigate(`/badAuthentication`);
         }
         else {
-          dispatch(setToken(data.token));
+          //dispatch(setToken(data.token));
+          localStorage.setItem("agendaToken", data.token);
           navigate(`/home`);
         }
       })
@@ -32,14 +33,12 @@ const Login = () => {
 
   useEffect(() => {
   }, [dispatch]);
-  let userFromState = useSelector((state) => state.user);
 
 
   return (
     <div className="p-1 m-1">
       <div className="card">
-        <div className="card-body">
-          <h6>{userFromState.name}</h6>
+        <div className="card-body" style={{minWidth: '150 rem', marginLeft: '100px', marginRight: '100px'}}>
           <h6 className="text-center">Veuilliez entrer vos identifiants </h6>
           <table className="table table-light">
             <tbody>

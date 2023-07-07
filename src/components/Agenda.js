@@ -12,11 +12,13 @@ function Agenda() {
   const [rdvList, setRdvList] = useState([]);
   const navigate = useNavigate();
 
-  const token = useSelector((state) => {
+  const token = localStorage["agendaToken"]; 
+
+  /*const token = useSelector((state) => {
     var tmpToken = state.user.token;
     return tmpToken;
   }
-  );
+  );*/
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +55,7 @@ function Agenda() {
         <div className="card-body">
           <h3>Agenda de rendez-vous</h3>
           <h6>Rechercher l'un de vos rendez-vous (entrez un nom de rendezVous)</h6>
-          <h6 className="d-flex align-items-center">
+          <div className="d-flex align-items-center">
             <input
               value={data.utilisateur}
               className="form-control me-2"
@@ -63,7 +65,7 @@ function Agenda() {
             <button onClick={() => navigate(`/modifierUser`)} className="btn btn-outline-secondary">
               <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
             </button>
-          </h6>
+          </div>
           <h6>Liste des rendez-vous réservés</h6>
           <div className="card">
         <div className="card-body">

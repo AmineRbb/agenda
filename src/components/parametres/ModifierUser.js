@@ -8,11 +8,14 @@ import { parametrerUserService } from '../../service/service';
 function ModifierUser() {
     const [data, setData] = useState(null);
     const navigate = useNavigate();
-    const token = useSelector((state) => {
+    
+    const token = localStorage["agendaToken"]; 
+    
+    /*const token = useSelector((state) => {
         var tmpToken = state.user.token;
         return tmpToken;
     }
-    );
+    );*/
 
     if (token !== "notlogin") {
         const headers = {

@@ -11,15 +11,14 @@ function SupprimerRole() {
     role:'',
   });
   const navigate = useNavigate();
- 
-  const token = useSelector((state) => {
-    var tmpToken = state.user.token;
-    return tmpToken;
-  }
-  );
-  /*if (token === "notlogin") {
-    navigate(`/login`);
-  };*/
+  const token = localStorage["agendaToken"]; 
+
+  //const token = useSelector((state) => {
+  //  var tmpToken = state.user.token;
+  //  return tmpToken;
+  //}
+  //);
+
 
 
   const handleDeleteRole = () => {
@@ -54,7 +53,7 @@ function SupprimerRole() {
         <div className="card-body">
           <h3 className="text-center"> Supprimer un role à un Utilisateur :</h3>
           <h6 className="text-center"> Veuilliez choisir le role ainsi que l'utilisateur de votre choix.</h6>
-          <h6>
+          <div>
             <table className="table table-light">
               <tbody>
                 <tr>
@@ -80,7 +79,7 @@ function SupprimerRole() {
           <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon> Soumettre
           </button>
           </h6>
-          </h6>
+          </div>
         </div>
       </div>
     </div>

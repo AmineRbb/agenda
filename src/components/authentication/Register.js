@@ -40,7 +40,7 @@ function Register() {
         <div className="card">
             <div className="card-body">
                 <h3 className="text-center">Créez votre compte DocPuting en entrant les informations :</h3>
-                <h6>
+                <div>
                     <table className="table table-light">
                         <tbody>
                             <tr>
@@ -133,7 +133,7 @@ function Register() {
                             onClick={handleSignup}
                             className="btn btn-outline-secondary">
                             <FontAwesomeIcon icon={faCircleCheck}></FontAwesomeIcon> S'inscrire
-                        </button></h6></h6>
+                        </button></h6></div>
             </div>
         </div>
     )

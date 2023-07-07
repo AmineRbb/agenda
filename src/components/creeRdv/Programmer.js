@@ -1,4 +1,4 @@
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faPaperPlane, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
@@ -7,21 +7,19 @@ function Programmer() {
 
   const user = useSelector((state) => state.user);
   const nameee = JSON.stringify(user);
-  console.log(user.token);
-  console.log(user);
-  console.log(nameee);
   const nameu = JSON.parse(nameee);
-  console.log(nameu);
 
   const [data, setData] = useState({
-    email: '',
-    firstname: '',
-    lastname: '',
-    dateOfBirth: '',
-    phoneNumber: '',
-    address: '',
-    city: '',
-    rolePrincipale: '',
+    description: '',
+    typeRdv: '',
+    jourDebut: '',
+    jourFin: '',
+    heureDebut:'',
+    heureFin:'',
+    minuteDebut: '',
+    minuteFin: '',
+    dureeRdv: '',
+    jourDisponible: '',
 });
 
   return (
@@ -30,89 +28,87 @@ function Programmer() {
         <div className="card">
           <div className="card-body">
             <h6>Programmer une plage de rendez-vous disponible pour vos clients</h6>
-            <h6>
+            <div>
                     <table className="table table-light">
                         <tbody>
                             <tr>
-                                <td>Email</td>
+                                <td>Description</td>
                                 <td><input
-                                    value={data.email}
+                                    value={data.description}
                                     className="form-control"
-                                    onChange={(e) => setData({ ...data, email: e.target.value })}
+                                    onChange={(e) => setData({ ...data, description: e.target.value })}
                                 ></input></td>
                             </tr>
                             <tr>
-                                <td>Mot de Passe</td>
+                                <td>Type de Rendez-vous</td>
                                 <td><input
-                                    type="password"
-                                    value={data.password}
+                                    value={data.typeRdv}
                                     className="form-control"
-                                    onChange={(e) => setData({ ...data, password: e.target.value })}
+                                    onChange={(e) => setData({ ...data, typeRdv: e.target.value })}
                                 ></input></td>
                             </tr>
                             <tr>
-                                <td>Confirmer Mot de Passe</td>
+                                <td>Jour du Début des Rendez-Vous</td>
                                 <td><input
-                                    type="password"
-                                    value={data.confirmPassword}
+                                    value={data.jourDebut}
                                     className="form-control"
-                                    onChange={(e) => setData({ ...data, confirmPassword: e.target.value })}
+                                    onChange={(e) => setData({ ...data, jourDebut: e.target.value })}
                                 ></input></td>
                             </tr>
                             <tr>
-                                <td>Prénom</td>
+                                <td>Heure du Début des Rendez-Vous</td>
                                 <td><input
-                                    value={data.firstname}
+                                    value={data.heureDebut}
                                     className="form-control"
-                                    onChange={(e) => setData({ ...data, firstname: e.target.value })}
+                                    onChange={(e) => setData({ ...data, heureDebut: e.target.value })}
                                 ></input></td>
                             </tr>
                             <tr>
-                                <td>Nom</td>
+                                <td>Minute du Début des Rendez-Vous</td>
                                 <td><input
-                                    value={data.lastname}
+                                    value={data.heureDebut}
                                     className="form-control"
-                                    onChange={(e) => setData({ ...data, lastname: e.target.value })}
+                                    onChange={(e) => setData({ ...data, minuteDebut: e.target.value })}
                                 ></input></td>
                             </tr>
                             <tr>
-                                <td>Date de naissance</td>
+                                <td>Jour de Fin des Rendez-Vous</td>
                                 <td><input
-                                    value={data.dateOfBirth}
+                                    value={data.jourFin}
                                     className="form-control"
-                                    onChange={(e) => setData({ ...data, dateOfBirth: e.target.value })}
+                                    onChange={(e) => setData({ ...data, jourFin: e.target.value })}
                                 ></input></td>
                             </tr>
                             <tr>
-                                <td>Numéro de téléphone</td>
+                                <td>Heure de Fin des Rendez-Vous</td>
                                 <td><input
-                                    value={data.phoneNumber}
+                                    value={data.heureFin}
                                     className="form-control"
-                                    onChange={(e) => setData({ ...data, phoneNumber: e.target.value })}
+                                    onChange={(e) => setData({ ...data, heureFin: e.target.value })}
                                 ></input></td>
                             </tr>
                             <tr>
-                                <td>Adresse</td>
+                                <td>Minute de Fin des Rendez-Vous</td>
                                 <td><input
-                                    value={data.adress}
+                                    value={data.minuteFin}
                                     className="form-control"
-                                    onChange={(e) => setData({ ...data, adress: e.target.value })}
+                                    onChange={(e) => setData({ ...data, minuteFin: e.target.value })}
                                 ></input></td>
                             </tr>
                             <tr>
-                                <td>Ville</td>
+                                <td>Durée de chaque Rendez Vous</td>
                                 <td><input
-                                    value={data.city}
+                                    value={data.dureeRdv}
                                     className="form-control"
-                                    onChange={(e) => setData({ ...data, city: e.target.value })}
+                                    onChange={(e) => setData({ ...data, dureeRdv: e.target.value })}
                                 ></input></td>
                             </tr>
                             <tr>
-                                <td>Rôle principal</td>
+                                <td>Liste des jours ou vous êtes Disponible</td>
                                 <td><input
-                                    value={data.rolePrincipale}
+                                    value={data.jourDisponible}
                                     className="form-control"
-                                    onChange={(e) => setData({ ...data, rolePrincipale: e.target.value })}
+                                    onChange={(e) => setData({ ...data, jourDisponible: e.target.value })}
                                 ></input></td>
                             </tr>
                         </tbody>
@@ -120,16 +116,16 @@ function Programmer() {
 
                     <h6 className="text-center">
                         <button
-                            onClick={handleSignup}
-                            className="btn btn-outline-secondary">
-                            <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon> S'inscrire
-                        </button></h6></h6>
+                            
+                            className="btn btn-outline-secondary"> S'inscrire
+                            <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon>
+                        </button></h6></div>
           
           </div>
         </div>
       </div>
-      <div>Programmer
-        <h6>alors donc {nameu.token} </h6>
+      <div>
+        <h6>nameu est {nameu.token} </h6>
         <h6>le user est {user.token}</h6>
       </div>
     </div>
@@ -137,3 +133,5 @@ function Programmer() {
 }
 
 export default Programmer
+
+//onClick={handleSignup}

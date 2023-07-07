@@ -10,7 +10,7 @@ export const authenticationService = async (loginUser) => {
       token: "error"
     };
     return updatedData;
-  }
+  };
 };
 
 
@@ -24,7 +24,7 @@ export const registerService = async (registerUser) => {
       token: "error"
     };
     return updatedData;
-  }
+  };
 };
 
 
@@ -38,7 +38,7 @@ export const parametrerUserService = async (param) => {
       pageReturn: "error"
     };
     return updatedData;
-  }
+  };
 };
 
 
@@ -56,7 +56,7 @@ export const ajouterRoleService = async (headers, dto) => {
       booleanPage: "false"
     };
     return updatedData;
-  }
+  };
 }
 
 /** récupere les informations et supprime un role avec un post et renvoie un boolean
@@ -72,7 +72,7 @@ export const supprimerRoleService = async (headers, dto) => {
       booleanPage: "false"
     };
     return updatedData;
-  }
+  };
   
 }
 
@@ -89,7 +89,7 @@ export const supprimerUtilisateurService = async (headers, dto) => {
       booleanPage: "false"
     };
     return updatedData;
-  }
+  };
 }
 
 /** récupere les informations et verif le mdp avec un post et renvoie un boolean
@@ -102,20 +102,19 @@ export const verificationMdpService = async (verifMdp) => {
   } catch (error) {
     console.error(error);
     throw error;
-  }
+  };
 }
-/*
-export const isLoginService = async () => {
-  const user = useSelector((state) => state.user);
+
+export const isLoginService = async (headers, user) => {
   const token = user.token;
   const returnable = {
     isLogin:"false",
     isAdmin:false
-  }
+  };
   try {
-    const response = await axios.post('http://localhost:8083/api/v1/auth/roles',token);
+    const response = await axios.post('http://localhost:8083/api/v1/auth/roles',token, {headers});
     const userRoles = response.data.roles;
-    const isAdmin = userRoles.some(role => role === 'admin');
+    const isAdmin = userRoles.some(role => role.name === 'ADMIN');
     console.log('User Roles:', userRoles);
     console.log('Is Admin:', isAdmin);
     returnable.isLogin="true";
@@ -123,6 +122,6 @@ export const isLoginService = async () => {
     return returnable;
   } catch (error) {
     console.error(error);
-    return returnable
-  }
-}*/
+    return returnable;
+  };
+}

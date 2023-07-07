@@ -1,8 +1,6 @@
 // redux/reducers/index.js
 import { combineReducers } from 'redux';
 import userReducer from './userReducer';
-import jwtUserReducer from './jwtUserReducer';
-import currentPageReducer from './currentPageReducer';
 //import React from 'react';
 //import ReactDOM from 'react-dom';
 //import { Provider } from 'react-redux';
@@ -19,8 +17,6 @@ import currentPageReducer from './currentPageReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
-  jwtUser: jwtUserReducer,
-  currentPage: currentPageReducer,
 });
   
 

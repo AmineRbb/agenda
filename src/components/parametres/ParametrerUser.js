@@ -9,13 +9,15 @@ import { useSelector } from 'react-redux';
 function ParametrerUser() {
   const [data, setData] = useState(null);
   const navigate = useNavigate();
-  const token = useSelector((state) => {
+  const token = localStorage["agendaToken"]; 
+  
+  /*useSelector((state) => {
     var tmpToken = state.user.token;
     return tmpToken;
   }
-  );
+  );*/
 
-  if (token !== "notlogin") {
+  if (!!token) {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
@@ -38,7 +40,7 @@ function ParametrerUser() {
         <div className="card-body">
           <h3 className="text-center">Informations Utilisateur</h3>
           {data ? (
-            <h6>
+            <div>
               <table className="table table-light">
                 <tbody>
                   <tr>
@@ -78,7 +80,7 @@ function ParametrerUser() {
 
               <h6> Modifier{' '} <button onClick={() => navigate(`/modifierUser`)} className="btn btn-outline-secondary">
                 <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
-              </button></h6></h6>
+              </button></h6></div>
           ) : (<p>Chargement des données ...</p>)}
         </div>
       </div>

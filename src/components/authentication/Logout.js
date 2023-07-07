@@ -10,7 +10,10 @@ function Logout() {
   const handleLogout = () => {
     dispatch(setToken("notlogin"));
     navigate(`/home`);
+  }
 
+  const handleNotLogout = () => {
+    navigate(`/home`)
   }
 
   return (
@@ -21,10 +24,13 @@ function Logout() {
           <h6>
             <button
               onClick={handleLogout}
-              className="btn btn-outline-success">Oui
+              className="btn btn-outline-success">
+                Oui
             </button>
             {"      "}
-            <button className="btn btn-outline-danger">
+            <button 
+            onClick={handleNotLogout}
+            className="btn btn-outline-danger">
               Non
             </button>
 
