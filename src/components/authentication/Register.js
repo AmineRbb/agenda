@@ -22,20 +22,20 @@ function Register() {
     const navigate = useNavigate();
 
     const handleSignup = () => {
-    
+
         registerService(data)
-          .then((dataResponse) => {
-            if (dataResponse.token === "error") {
-              navigate(`/badAuthentication`);
-            }
-            else {
-              dispatch(setUser(dataResponse));
-              navigate(`/inscrit`);
-            }
-          })
-    
-      };
-    
+            .then((dataResponse) => {
+                if (dataResponse.token === "error") {
+                    navigate(`/badAuthentication`);
+                }
+                else {
+                    dispatch(setUser(dataResponse));
+                    navigate(`/inscrit`);
+                }
+            })
+
+    };
+
     return (
         <div className="card">
             <div className="card-body">

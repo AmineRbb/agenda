@@ -7,37 +7,37 @@ import { parametrerUserService } from '../../service/service';
 
 function ModifierUser() {
     const [data, setData] = useState(null);
-  const navigate = useNavigate();
-  const token = useSelector((state) => {
-    var tmpToken = state.user.token;
-    return tmpToken;
-  }
-  );
+    const navigate = useNavigate();
+    const token = useSelector((state) => {
+        var tmpToken = state.user.token;
+        return tmpToken;
+    }
+    );
 
-  if (token !== "notlogin") {
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-    //axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    //axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
-    parametrerUserService(headers)
-      .then((response) => {
-        setData(response);
-      })
-  }
-  else {
-    navigate(`/login`);
-  }
+    if (token !== "notlogin") {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
+        //axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        //axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
+        parametrerUserService(headers)
+            .then((response) => {
+                setData(response);
+            })
+    }
+    else {
+        navigate(`/login`);
+    }
 
-  const handleModif = () => {
-    navigate(`/infoModifier`);
-  }
+    const handleModif = () => {
+        navigate(`/infoModifier`);
+    }
 
 
     return (
         <div className="card">
             <div className="card-body">
-                
+
                 {data ? (
                     <div>
                         <h3 className="text-center">Modifier les Informations Utilisateur de {data.email} </h3>
@@ -107,13 +107,13 @@ function ModifierUser() {
                         </table>
 
                         <div><h6> Modifier Les informations utilisateur </h6>
-                            <button 
-                            onClick={handleModif}
-                            className="btn btn-outline-secondary">
-                            <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
-                        </button>
+                            <button
+                                onClick={handleModif}
+                                className="btn btn-outline-secondary">
+                                <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
+                            </button>
                         </div>
-                        </div>
+                    </div>
                 ) : (<p>Chargement des données ...</p>)}
             </div>
         </div>
