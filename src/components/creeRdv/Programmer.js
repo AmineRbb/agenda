@@ -6,8 +6,9 @@ import { useSelector } from 'react-redux';
 function Programmer() {
 
   const user = useSelector((state) => state.user);
+  const token = localStorage["agendaToken"]; 
   const nameee = JSON.stringify(user);
-  const nameu = JSON.parse(nameee);
+  const nameu = token;
 
   const [data, setData] = useState({
     description: '',
@@ -125,7 +126,7 @@ function Programmer() {
         </div>
       </div>
       <div>
-        <h6>nameu est {nameu.token} </h6>
+        <h6>nameu est {nameu} </h6>
         <h6>le user est {user.token}</h6>
       </div>
     </div>

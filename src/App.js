@@ -23,78 +23,78 @@ import BadAuthentication from "./components/authentication/BadAuthentication";
 import NotAuthorized from "./components/authentication/NotAuthorized";
 import InfoModifier from "./components/parametres/InfoModifier";
 import { useSelector } from "react-redux";
-import { isLoginService } from "./service/service";
-import { useEffect } from "react";
+import { useIsLogin, useParametrerUser } from "./service/service";
+import { useEffect, useState } from "react";
 
- function App() {
+function AppContent() {
+  const isLoginService = useIsLogin();
+  const isLoginAppel = useSelector((state) => state.appelService.isLoginAppel);
+  const isLogin = useSelector((state) => state.user.isLogin);
+  const infoUser = useParametrerUser();
+  if (!isLoginAppel && isLogin) {
+    isLoginService()
+      .then((data) => {
+
+      });
+    infoUser()
+    .then((data) => {
+
+    });
+  }
+  const isAdmin = useSelector((state) => state.user.isAdmin);
+  const isPro = useSelector((state) => state.user.isPro);
+  const users = useSelector((state) => state.user.user);
+  const token = localStorage["agendaToken"];
+
   let adminLink = "/login";
   let profileLink = "/login";
-  let logoutLink = "";
-  const users = useSelector((state) => state.user);
-  const token = localStorage["agendaToken"]; 
+  let programmerLink = "/login";
+  let agendaLink = "/login";
 
-  /*onst token = useSelector((state) => {
-    var tmpToken = state.user.token;
-    return tmpToken;
-  });*/
 
-  let isLogin = "false";
-  let isAdmin = false;
 
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  };
-    
-  useEffect(() => {
-    async function fetchData() {
-      console.log("changement de l'état de co", isLogin);
-      return await isLoginService(headers, users)
-        .then((returnable) => {
-          isLogin = returnable.isLogin;
-          isAdmin = returnable.isAdmin;
-          if (isLogin === "true") {
-            if (isAdmin) {
-              adminLink = "/parametresAdmin";
-            } else {
-              adminLink = "/notAuthorized";
-            }
-          }
-        })
-        .catch((error) => {
-          isLogin = "false";
-          isAdmin = false;
-          if (isLogin === true) {
-            if (isAdmin) {
-              adminLink = "/parametresAdmin";
-            } else {
-              adminLink = "/notAuthorized";
-            }
-          }
-        });
+  if (isLogin) {
+
+    agendaLink = "/agenda";
+    profileLink = "/parametresUser";
+
+    if (isPro) {
+      programmerLink = "/programmerRdv";
     }
-    fetchData();
-  }, []);
+    else {
+      programmerLink = "/notAuthorized";
+    }
+
+    if (isAdmin) {
+      adminLink = "/parametresAdmin";
+    } else {
+      adminLink = "/notAuthorized";
+    }
+  }
 
   return (
-    <BrowserRouter>
+    <>
       <div>
         <h1 className="d-flex justify-content-between align-items-center">
           <span className="me-auto">DocPuting</span>
           {isLogin ? (
+            <div>
+              <h6>Bonjour {users.firstName}</h6>
+              <Link
+                to="/logout"
+                className="btn btn-outline-info ms-1"
+                style={{ marginRight: "10px", marginTop: "5px" }}
+              >
+                <FontAwesomeIcon icon={faUser} className="me-1" /> Se déconnecter
+              </Link>
+            </div>
+          ) : (
             <Link
               to="/login"
               className="btn btn-outline-info ms-1"
               style={{ marginRight: "10px", marginTop: "5px" }}
             >
               <FontAwesomeIcon icon={faUser} className="me-1" /> Se connecter
-            </Link>
-          ) : (
-            <Link
-              to="/logout"
-              className="btn btn-outline-info ms-1"
-              style={{ marginRight: "10px", marginTop: "5px" }}
-            >
-              <FontAwesomeIcon icon={faUser} className="me-1" /> Se déconnecter
             </Link>
           )}
         </h1>
@@ -110,7 +110,7 @@ import { useEffect } from "react";
             </li>
             <li>
               <Link
-                to="/agenda"
+                to={agendaLink}
                 className="customamtitle btn btn-outline-info ms-1"
               >
                 Agenda
@@ -124,38 +124,36 @@ import { useEffect } from "react";
                 Reserver
               </Link>
             </li>
-            <li>
-              <Link
-                to="/programmerRdv"
-                className="customamtitle btn btn-outline-info ms-1"
-              >
-                Programmer
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/parametresUser"
-                className="customamtitle btn btn-outline-info ms-1"
-              >
-                Profile
-              </Link>
-            </li>
-            <li>
-              <Link
-                to={adminLink}
-                className="customamtitle btn btn-outline-info ms-1"
-              >
-                Admin
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/logout"
-                className="customamtitle btn btn-outline-info ms-1"
-              >
-                Deconnexion
-              </Link>
-            </li>
+            {isPro && (
+              <li>
+                <Link
+                  to={programmerLink}
+                  className="customamtitle btn btn-outline-info ms-1"
+                >
+                  Programmer
+                </Link>
+              </li>
+            )}
+            {isLogin && (
+              <li>
+                <Link
+                  to={profileLink}
+                  className="customamtitle btn btn-outline-info ms-1"
+                >
+                  Profile
+                </Link>
+              </li>
+            )}
+            {isAdmin && (
+              <li>
+                <Link
+                  to={adminLink}
+                  className="customamtitle btn btn-outline-info ms-1"
+                >
+                  Admin
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
         <Routes>
@@ -191,6 +189,29 @@ import { useEffect } from "react";
         </Routes>
         <h6>By High-Computing</h6>
         <p>32 rue Chaillon, Villeneuve la Garenne</p>
+      </div>
+    </>
+  );
+}
+
+
+function App() {
+
+  const [refresh, setRefresh] = useState(false);
+  const isLogin = useSelector((state) => state.isLogin);
+  const isAdmin = useSelector((state) => state.isAdmin);
+
+  // Effectue une action lorsque les valeurs de isLogin et isAdmin changent
+  useEffect(() => {
+    // Déclenche un rafraîchissement du rendu
+    setRefresh(!refresh);
+  }, [isLogin, isAdmin]);
+
+
+  return (
+    <BrowserRouter>
+      <div>
+        <AppContent key={refresh} isLogin={isLogin} isAdmin={isAdmin} />
       </div>
     </BrowserRouter>
   );

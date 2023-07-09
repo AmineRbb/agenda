@@ -11,11 +11,11 @@ function BadAuthentication() {
                 <div className="card-body">
                     <h6>Le nom d'utilisateur ou le mot de passe ne correspondent pas.</h6>
                     <div className="text-center">
-                        <button
+                        <h6><button
                             onClick={() => navigate(`/login`)}
                             className="btn btn-outline-secondary"> 
-                            <FontAwesomeIcon icon={faRotateLeft}></FontAwesomeIcon> <h6>Retour</h6>
-                        </button></div>
+                            <FontAwesomeIcon icon={faRotateLeft}></FontAwesomeIcon> Retour
+                        </button></h6></div>
                 </div>
             </div>
         </div>

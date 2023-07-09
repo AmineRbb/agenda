@@ -1,6 +1,9 @@
 // redux/reducers/index.js
 import { combineReducers } from 'redux';
 import userReducer from './userReducer';
+import rdvReducer from './rdvReducer';
+import rdvListReducer from './rdvListReducer';
+import appelServiceReducer from './appelServiceReducer';
 //import React from 'react';
 //import ReactDOM from 'react-dom';
 //import { Provider } from 'react-redux';
@@ -17,6 +20,9 @@ import userReducer from './userReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
+  rdv: rdvReducer,
+  rdvList: rdvListReducer,
+  appelService: appelServiceReducer,
 });
   
 

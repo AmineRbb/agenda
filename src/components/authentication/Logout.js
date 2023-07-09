@@ -1,14 +1,17 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setToken } from '../../redux/reducers/userReducer';
+import { setIsAdmin, setIsLogin, setIsPro } from '../../redux/reducers/userReducer';
 
 function Logout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(setToken("notlogin"));
+    localStorage.setItem("agendaToken", "");
+    dispatch(setIsLogin(false));
+    dispatch(setIsPro(false));
+    dispatch(setIsAdmin(false));
     navigate(`/home`);
   }
 
@@ -25,12 +28,12 @@ function Logout() {
             <button
               onClick={handleLogout}
               className="btn btn-outline-success">
-                Oui
+              Oui
             </button>
             {"      "}
-            <button 
-            onClick={handleNotLogout}
-            className="btn btn-outline-danger">
+            <button
+              onClick={handleNotLogout}
+              className="btn btn-outline-danger">
               Non
             </button>
 

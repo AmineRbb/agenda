@@ -3,27 +3,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { parametrerUserService } from '../../service/service';
+import { useParametrerUser } from '../../service/service';
 
 function ModifierUser() {
     const [data, setData] = useState(null);
     const navigate = useNavigate();
-    
-    const token = localStorage["agendaToken"]; 
-    
-    /*const token = useSelector((state) => {
-        var tmpToken = state.user.token;
-        return tmpToken;
-    }
-    );*/
+    const token = localStorage["agendaToken"];
+    const users = useSelector((state) => state.user.user);
+    const parametrerUserService = useParametrerUser();
 
-    if (token !== "notlogin") {
-        const headers = {
-            Authorization: `Bearer ${token}`,
-        };
-        //axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        //axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
-        parametrerUserService(headers)
+
+    if (!!token || !!users.email) {
+
+        parametrerUserService()
             .then((response) => {
                 setData(response);
             })
@@ -43,67 +35,67 @@ function ModifierUser() {
 
                 {data ? (
                     <div>
-                        <h3 className="text-center">Modifier les Informations Utilisateur de {data.email} </h3>
+                        <h3 className="text-center">Modifier les Informations Utilisateur de {users.email} </h3>
                         <table className="table table-light">
                             <tbody>
                                 <tr>
                                     <td>email</td>
-                                    <td>{data.email}</td>
+                                    <td>{users.email}</td>
                                 </tr>
                                 <tr>
                                     <td>Prénom</td>
                                     <td><input
-                                        value={data.firstname}
+                                        value={users.firstname}
                                         className="form-control"
-                                        onChange={(e) => setData({ ...data, firstname: e.target.value })}
+                                        onChange={(e) => setData({ ...users, firstname: e.target.value })}
                                     ></input></td>
                                 </tr>
                                 <tr>
                                     <td>Nom</td>
                                     <td><input
-                                        value={data.lastname}
+                                        value={users.lastname}
                                         className="form-control"
-                                        onChange={(e) => setData({ ...data, lastname: e.target.value })}
+                                        onChange={(e) => setData({ ...users, lastname: e.target.value })}
                                     ></input></td>
                                 </tr>
                                 <tr>
                                     <td>Date de naissance</td>
                                     <td><input
-                                        value={data.dateOfBirth}
+                                        value={users.dateOfBirth}
                                         className="form-control"
-                                        onChange={(e) => setData({ ...data, dateOfBirth: e.target.value })}
+                                        onChange={(e) => setData({ ...users, dateOfBirth: e.target.value })}
                                     ></input></td>
                                 </tr>
                                 <tr>
                                     <td>Numéro de téléphone</td>
                                     <td><input
-                                        value={data.phoneNumber}
+                                        value={users.phoneNumber}
                                         className="form-control"
-                                        onChange={(e) => setData({ ...data, phoneNumber: e.target.value })}
+                                        onChange={(e) => setData({ ...users, phoneNumber: e.target.value })}
                                     ></input></td>
                                 </tr>
                                 <tr>
                                     <td>Adresse</td>
                                     <td><input
-                                        value={data.adress}
+                                        value={users.adress}
                                         className="form-control"
-                                        onChange={(e) => setData({ ...data, adress: e.target.value })}
+                                        onChange={(e) => setData({ ...users, adress: e.target.value })}
                                     ></input></td>
                                 </tr>
                                 <tr>
                                     <td>Ville</td>
                                     <td><input
-                                        value={data.city}
+                                        value={users.city}
                                         className="form-control"
-                                        onChange={(e) => setData({ ...data, city: e.target.value })}
+                                        onChange={(e) => setData({ ...users, city: e.target.value })}
                                     ></input></td>
                                 </tr>
                                 <tr>
                                     <td>Rôle principal</td>
                                     <td><input
-                                        value={data.rolePrincipale}
+                                        value={users.rolePrincipale}
                                         className="form-control"
-                                        onChange={(e) => setData({ ...data, rolePrincipale: e.target.value })}
+                                        onChange={(e) => setData({ ...users, rolePrincipale: e.target.value })}
                                     ></input></td>
                                 </tr>
                             </tbody>

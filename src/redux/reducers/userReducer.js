@@ -4,14 +4,33 @@ export const setUser = (user) => ({
   payload: user,
 });
 
-export const setToken = (token) => ({
-  type: 'SET_TOKEN',
-  payload: token,
+export const setIsLogin = (isLogin) => ({
+  type: 'SET_ISLOGIN',
+  payload: isLogin,
 });
 
+export const setIsAdmin = (isAdmin) => ({
+  type: 'SET_ISADMIN',
+  payload: isAdmin,
+});
+
+export const setIsPro = (isPro) => ({
+  type: 'SET_ISPRO',
+  payload: isPro,
+});
 const initialState = {
-  token: "notlogin",
-  user: {}
+  user: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    dateOfBirth: '',
+    phone: '',
+    city: '',
+    roles: ''
+  },
+  isLogin: false,
+  isAdmin: false,
+  isPro: false,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -25,6 +44,21 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         token: action.payload,
+      };
+    case 'SET_ISLOGIN':
+      return {
+        ...state,
+        isLogin: action.payload,
+      };
+    case 'SET_ISADMIN':
+      return {
+        ...state,
+        isAdmin: action.payload,
+      };
+    case 'SET_ISPRO':
+      return {
+        ...state,
+        isPro: action.payload,
       };
     default:
       return state;

@@ -1,17 +1,40 @@
 import axios from "axios";
+import { setIsLogin, setIsPro, setIsAdmin, setUser } from "../redux/reducers/userReducer";
+import { useDispatch } from "react-redux";
+import { setAppelService } from "../redux/reducers/appelServiceReducer";
 
-export const authenticationService = async (loginUser) => {
-  try {
-    const response = await axios.post('http://localhost:8083/api/v1/auth/authenticate', loginUser);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    const updatedData = {
-      token: "error"
-    };
-    return updatedData;
+export const useAuthentication = () => {
+  const dispatch = useDispatch();
+
+  const authenticationService = async (loginUser) => {
+    try {
+      const responseLogin = await axios.post('http://localhost:8083/api/v1/auth/authenticate', loginUser);
+
+
+      const headers = {
+        Authorization: `Bearer ${responseLogin.data.token}`,
+      };
+
+
+      const responseRoles = await axios.post('http://localhost:8083/api/v1/auth/roles', responseLogin.data.token, { headers });
+      dispatch(setIsLogin(true));
+      dispatch(setIsPro(responseRoles.data.roles.some(roles => roles.name === 'PRO')));
+      dispatch(setIsAdmin(responseRoles.data.roles.some(roles => roles.name === 'ADMIN')));
+      localStorage.setItem("agendaToken", responseLogin.data.token);
+
+      return responseLogin.data;
+    } catch (error) {
+      console.error(error);
+      const updatedData = {
+        token: "error"
+      };
+      return updatedData;
+    }
   };
+
+  return authenticationService;
 };
+
 
 
 export const registerService = async (registerUser) => {
@@ -27,19 +50,31 @@ export const registerService = async (registerUser) => {
   };
 };
 
+export const useParametrerUser = () => {
+  const dispatch = useDispatch();
 
-export const parametrerUserService = async (param) => {
-  try {
-    const response = await axios.get('http://localhost:8083/api/v1/main/modifInfo', {headers:param});
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    const updatedData = {
-      pageReturn: "error"
+  const parametrerUserService = async () => {
+    try {
+
+      const token = localStorage["agendaToken"];
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      const response = await axios.get('http://localhost:8083/api/v1/main/modifInfo', { headers });
+      dispatch(setUser(response.data));
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      const updatedData = {
+        pageReturn: "error"
+      };
+      return updatedData;
     };
-    return updatedData;
   };
-};
+
+  return parametrerUserService;
+}
 
 
 
@@ -48,7 +83,7 @@ export const parametrerUserService = async (param) => {
  */
 export const ajouterRoleService = async (headers, dto) => {
   try {
-    const response = await axios.post('http://localhost:8083/api/v1/admin/addRoleUtilisateur', dto, {headers});
+    const response = await axios.post('http://localhost:8083/api/v1/admin/addRoleUtilisateur', dto, { headers });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -64,7 +99,7 @@ export const ajouterRoleService = async (headers, dto) => {
  */
 export const supprimerRoleService = async (headers, dto) => {
   try {
-    const response = await axios.post('http://localhost:8083/api/v1/admin/removeRoleUtilisateur', dto, {headers});
+    const response = await axios.post('http://localhost:8083/api/v1/admin/removeRoleUtilisateur', dto, { headers });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -73,7 +108,7 @@ export const supprimerRoleService = async (headers, dto) => {
     };
     return updatedData;
   };
-  
+
 }
 
 /** récupere les informations et ajoute un user avec un post et renvoie un boolean
@@ -81,7 +116,7 @@ export const supprimerRoleService = async (headers, dto) => {
  */
 export const supprimerUtilisateurService = async (headers, dto) => {
   try {
-    const response = await axios.post('http://localhost:8083/api/v1/admin/deleteUtilisateur', dto, {headers});
+    const response = await axios.post('http://localhost:8083/api/v1/admin/deleteUtilisateur', dto, { headers });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -104,24 +139,29 @@ export const verificationMdpService = async (verifMdp) => {
     throw error;
   };
 }
+export const useIsLogin = () => {
+  const dispatch = useDispatch();
 
-export const isLoginService = async (headers, user) => {
-  const token = user.token;
-  const returnable = {
-    isLogin:"false",
-    isAdmin:false
-  };
-  try {
-    const response = await axios.post('http://localhost:8083/api/v1/auth/roles',token, {headers});
-    const userRoles = response.data.roles;
-    const isAdmin = userRoles.some(role => role.name === 'ADMIN');
-    console.log('User Roles:', userRoles);
-    console.log('Is Admin:', isAdmin);
-    returnable.isLogin="true";
-    returnable.isAdmin=isAdmin;
-    return returnable;
-  } catch (error) {
-    console.error(error);
-    return returnable;
-  };
+  const isLoginService = async () => {
+    const token = localStorage["agendaToken"];
+    const returnable = {
+      token: token,
+    };
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    try {
+      const responseRoles = await axios.post('http://localhost:8083/api/v1/auth/roles', token, { headers });
+      dispatch(setIsLogin(true));
+      dispatch(setIsPro(responseRoles.data.roles.some(roles => roles.name === 'PRO')));
+      dispatch(setIsAdmin(responseRoles.data.roles.some(roles => roles.name === 'ADMIN')));
+      dispatch(setAppelService(true));
+      return returnable;
+    } catch (error) {
+      console.error(error);
+      return returnable;
+    };
+  }
+
+  return isLoginService;
 }
