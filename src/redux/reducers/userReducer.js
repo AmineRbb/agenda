@@ -4,7 +4,6 @@ export const setUser = (user) => ({
   payload: user,
 });
 
-
 export const disconnect = () => ({
   type: 'DISCONNECT_USER',
 });

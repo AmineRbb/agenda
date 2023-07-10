@@ -129,7 +129,7 @@ export const supprimerUtilisateurService = async (headers, dto) => {
  */
 export const verificationMdpService = async (verifMdp) => {
   try {
-    const response = await axios.post('http://localhost:8083/api/v1/main/modifInfo', verifMdp);
+    const response = await axios.post('http://localhost:8083/api/v1/main/getInfo', verifMdp);
     return response.data;
   } catch (error) {
     console.error(error);
