@@ -1,7 +1,6 @@
 import axios from "axios";
-import { setIsLogin, setIsPro, setIsAdmin, setUser } from "../redux/reducers/userReducer";
+import { setRoles, setUser } from "../redux/reducers/userReducer";
 import { useDispatch } from "react-redux";
-import { setAppelService } from "../redux/reducers/appelServiceReducer";
 
 export const useAuthentication = () => {
   const dispatch = useDispatch();
@@ -17,9 +16,7 @@ export const useAuthentication = () => {
 
 
       const responseRoles = await axios.post('http://localhost:8083/api/v1/auth/roles', responseLogin.data.token, { headers });
-      dispatch(setIsLogin(true));
-      dispatch(setIsPro(responseRoles.data.roles.some(roles => roles.name === 'PRO')));
-      dispatch(setIsAdmin(responseRoles.data.roles.some(roles => roles.name === 'ADMIN')));
+      dispatch(setRoles(responseRoles.data.roles));
       localStorage.setItem("agendaToken", responseLogin.data.token);
 
       return responseLogin.data;
@@ -139,7 +136,7 @@ export const verificationMdpService = async (verifMdp) => {
     throw error;
   };
 }
-export const useIsLogin = () => {
+export const useIsLoggedIn = () => {
   const dispatch = useDispatch();
 
   const isLoginService = async () => {
@@ -152,10 +149,8 @@ export const useIsLogin = () => {
     };
     try {
       const responseRoles = await axios.post('http://localhost:8083/api/v1/auth/roles', token, { headers });
-      dispatch(setIsLogin(true));
-      dispatch(setIsPro(responseRoles.data.roles.some(roles => roles.name === 'PRO')));
-      dispatch(setIsAdmin(responseRoles.data.roles.some(roles => roles.name === 'ADMIN')));
-      dispatch(setAppelService(true));
+      dispatch(setRoles(responseRoles.data.roles));
+    //  dispatch(setAppelService(true));
       return returnable;
     } catch (error) {
       console.error(error);

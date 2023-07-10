@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { getAllRdvService } from '../service/serviceRdv';
-import { useSelector } from 'react-redux';
 
 function Agenda() {
   const [data, setData] = useState({
@@ -71,24 +70,26 @@ function Agenda() {
         <div className="card-body">
           <table style={{ borderSpacing: '10px', tableLayout: 'fixed' }}>
             <thead>
-              <td>
-                <h6>Nom</h6>
-              </td>
-              <td>
-                <h6>Client</h6>
-              </td>
-              <td>
-                <h6>Professionnel</h6>
-              </td>
-              <td>
-                <h6>Date</h6>
-              </td>
-              <td>
-                <h6>Durée</h6>
-              </td>
-              <td>
-                <h6>Description</h6>
-              </td>
+              <tr>
+                <th>
+                  <h6>Nom</h6>
+                </th>
+                <th>
+                  <h6>Client</h6>
+                </th>
+                <th>
+                  <h6>Professionnel</h6>
+                </th>
+                <th>
+                  <h6>Date</h6>
+                </th>
+                <th>
+                  <h6>Durée</h6>
+                </th>
+                <th>
+                  <h6>Description</h6>
+                </th>
+             </tr>
             </thead>
             <tbody>
               {rdvList.map((rdv) => (

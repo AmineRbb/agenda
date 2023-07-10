@@ -4,22 +4,18 @@ export const setUser = (user) => ({
   payload: user,
 });
 
-export const setIsLogin = (isLogin) => ({
-  type: 'SET_ISLOGIN',
-  payload: isLogin,
+
+export const disconnect = () => ({
+  type: 'DISCONNECT_USER',
 });
 
-export const setIsAdmin = (isAdmin) => ({
-  type: 'SET_ISADMIN',
-  payload: isAdmin,
+export const setRoles = (roles) => ({
+  type: 'SET_ROLES',
+  payload: roles,
 });
 
-export const setIsPro = (isPro) => ({
-  type: 'SET_ISPRO',
-  payload: isPro,
-});
 const initialState = {
-  user: {
+  connectedUser: {
     firstName: '',
     lastName: '',
     email: '',
@@ -38,22 +34,28 @@ const userReducer = (state = initialState, action) => {
     case 'SET_USER':
       return {
         ...state,
-        user: action.payload,
+        isLogin: true,
+        connectedUser: action.payload,
       };
-    case 'SET_TOKEN':
+    case 'DISCONNECT_USER':
+        localStorage.removeItem('agendaToken');
+        return {
+          ...state,
+          isLogin: false,
+          isAdmin: false,
+          isPro: false,
+          connectedUser: {},
+        };
+      case 'SET_TOKEN':
       return {
         ...state,
         token: action.payload,
       };
-    case 'SET_ISLOGIN':
+    case 'SET_ROLES':
       return {
         ...state,
-        isLogin: action.payload,
-      };
-    case 'SET_ISADMIN':
-      return {
-        ...state,
-        isAdmin: action.payload,
+        isAdmin: action.payload.some(roles => roles.name === 'ADMIN'),
+        isPro: action.payload.some(roles => roles.name === 'PRO')
       };
     case 'SET_ISPRO':
       return {
