@@ -9,6 +9,7 @@ export const useAuthentication = () => {
     try {
       const responseLogin = await axios.post('http://localhost:8083/api/v1/auth/authenticate', loginUser);
 
+      localStorage.setItem("agendaToken", responseLogin.data.token);
 
       const headers = {
         Authorization: `Bearer ${responseLogin.data.token}`,
@@ -17,7 +18,6 @@ export const useAuthentication = () => {
 
       const responseRoles = await axios.post('http://localhost:8083/api/v1/auth/roles', responseLogin.data.token, { headers });
       dispatch(setRoles(responseRoles.data.roles));
-      localStorage.setItem("agendaToken", responseLogin.data.token);
 
       return responseLogin.data;
     } catch (error) {
@@ -58,7 +58,7 @@ export const useParametrerUser = () => {
         Authorization: `Bearer ${token}`,
       };
 
-      const response = await axios.get('http://localhost:8083/api/v1/main/modifInfo', { headers });
+      const response = await axios.get('http://localhost:8083/api/v1/main/getInfo', { headers });
       dispatch(setUser(response.data));
       return response.data;
     } catch (error) {
@@ -72,6 +72,25 @@ export const useParametrerUser = () => {
 
   return parametrerUserService;
 }
+
+
+export const getUserInfo = async () => {
+  const token = localStorage["agendaToken"];
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+
+  try {
+    const response = await axios.get('http://localhost:8083/api/v1/main/getInfo', { headers });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    const updatedData = {
+      token: "error"
+    };
+    return updatedData;
+  };
+};
 
 
 
@@ -126,7 +145,7 @@ export const supprimerUtilisateurService = async (headers, dto) => {
 
 /** récupere les informations et verif le mdp avec un post et renvoie un boolean
  *  appelé pour parametrer User
- */
+
 export const verificationMdpService = async (verifMdp) => {
   try {
     const response = await axios.post('http://localhost:8083/api/v1/main/getInfo', verifMdp);
@@ -135,7 +154,8 @@ export const verificationMdpService = async (verifMdp) => {
     console.error(error);
     throw error;
   };
-}
+} */
+
 export const useIsLoggedIn = () => {
   const dispatch = useDispatch();
 

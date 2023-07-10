@@ -9,22 +9,21 @@ import { useSelector } from 'react-redux';
 function ParametrerUser() {
   const navigate = useNavigate();
   const token = localStorage["agendaToken"];
-  const users = useSelector((state) => state.user.user);
+  const users = useSelector((state) => state.userSlice.connectedUser);
   const parametrerUserService = useParametrerUser();
 
-  useEffect(() => {
-    if (!!token || !!users.email) {
-      
-      parametrerUserService()
-        .then((response) => {
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } else {
-      navigate(`/login`);
-    }
-  }, [navigate, token]);
+  if (!!token || !!users.email) {
+    
+    parametrerUserService()
+      .then((response) => {
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } else {
+    navigate(`/login`);
+  }
+
 
   return (
     <div className="p-1 m-1">

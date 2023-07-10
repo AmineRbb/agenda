@@ -4,6 +4,7 @@ import userReducer from './userReducer';
 import rdvReducer from './rdvReducer';
 import rdvListReducer from './rdvListReducer';
 import appelServiceReducer from './appelServiceReducer';
+import { userSliceReducer } from '../slices/user';
 //import React from 'react';
 //import ReactDOM from 'react-dom';
 //import { Provider } from 'react-redux';
@@ -19,7 +20,8 @@ import appelServiceReducer from './appelServiceReducer';
   );*/
 
 const rootReducer = combineReducers({
-  user: userReducer,
+  userSlice: userSliceReducer,
+//  user: userReducer,
   rdv: rdvReducer,
   rdvList: rdvListReducer,
   appelService: appelServiceReducer,

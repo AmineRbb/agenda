@@ -1,0 +1,11 @@
+import axios from "axios";
+
+/*
+const backendUrl = 'http://localhost:8083/api/v1';
+
+export function fetchTokenCall(loginUser) 
+{
+    axios.post(backendUrl + '/auth/authenticate', loginUser);
+}
+voir pourquoi ça ne fonctionne pas 
+*/

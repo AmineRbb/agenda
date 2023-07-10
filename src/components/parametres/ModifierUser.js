@@ -9,8 +9,8 @@ function ModifierUser() {
     const [data, setData] = useState(null);
     const navigate = useNavigate();
     const token = localStorage["agendaToken"];
-    const users = useSelector((state) => state.user.user);
-    const parametrerUserService = useParametrerUser();
+    const users = useSelector((state) => state.userSlice);
+/*    const parametrerUserService = useParametrerUser();
 
 
     if (!!token || !!users.email) {
@@ -23,7 +23,7 @@ function ModifierUser() {
     else {
         navigate(`/login`);
     }
-
+*/
     const handleModif = () => {
         navigate(`/infoModifier`);
     }

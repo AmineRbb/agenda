@@ -7,23 +7,16 @@ import { useSelector } from "react-redux";
 import { useIsLoggedIn, useParametrerUser } from "../service/service";
 
 function Header() {
-  const isLoginService = useIsLoggedIn();
-  const isLoginAppel = useSelector((state) => state.appelService.isLoginAppel);
-  const isLogin = useSelector((state) => state.user.isLogin);
-  const infoUser = useParametrerUser();
-  if (!isLoginAppel && isLogin) {
-    isLoginService()
-      .then((data) => {});
-    infoUser()
-    .then((data) => {
-
-    });
-  }
-  const isAdmin = useSelector((state) => state.user.isAdmin);
-  const isPro = useSelector((state) => state.user.isPro);
+ // const isLoginService = useIsLoggedIn();
+  //const isLoginAppel = useSelector((state) => state.appelService.isLoginAppel);
+  const isLogin = useSelector((state) => state.userSlice.isLoggedIn);
   const connectedUser = useSelector((state) => {
-    return state.user.connectedUser;
-});
+    return state.userSlice.connectedUser;
+  });
+
+
+  const isAdmin = useSelector((state) => state.userSlice.isAdmin);
+  const isPro = useSelector((state) => state.userSlice.isPro);
 
   let adminLink = "/login";
   let profileLink = "/login";

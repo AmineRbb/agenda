@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 function Programmer() {
 
-  const user = useSelector((state) => state.user);
+  const user =  useSelector((state) => state.userSlice);
   const token = localStorage["agendaToken"]; 
   const nameee = JSON.stringify(user);
   const nameu = token;
