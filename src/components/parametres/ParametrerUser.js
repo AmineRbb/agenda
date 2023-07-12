@@ -2,15 +2,42 @@ import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { useParametrerUser } from '../../service/service';
-import { useSelector } from 'react-redux';
+import { getUserInfo, useParametrerUser } from '../../service/service';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 function ParametrerUser() {
   const navigate = useNavigate();
-  const token = localStorage["agendaToken"];
+  const dispatch = useDispatch();
+  //const token = localStorage["agendaToken"];
   const users = useSelector((state) => state.userSlice.connectedUser);
-  const parametrerUserService = useParametrerUser();
+ /*   if(users.firstName===""){
+      dispatch(getUserInfo()).then((data) => {
+        console.log(data)
+        if(data.pageReturn!=="error"){
+        } else {
+          navigate(`/login`);
+        }});
+  };*/
+  /*const loginUser = { email, password };
+    dispatch(getUserInfo()).then((data) => {
+        console.log(data)
+        if(data.pageReturn!=="error"){
+        
+        } else {
+          navigate(`/login`);
+        }*/
+
+        /*
+        if (data.token === "error") {
+          navigate(`/badAuthentication`);
+        }
+        else {
+          parametrerUserService();
+          navigate(`/home`);
+        }*/
+   //   });
+ /* const parametrerUserService = useParametrerUser();
 
   if (!!token || !!users.email) {
     
@@ -23,7 +50,7 @@ function ParametrerUser() {
   } else {
     navigate(`/login`);
   }
-
+*/
 
   return (
     <div className="p-1 m-1">

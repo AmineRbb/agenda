@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthentication, useParametrerUser } from '../../service/service';
 import { useDispatch } from 'react-redux';
-import { fetchToken, getUserInfo } from '../../redux/slices/user';
+import { fetchToken, getUserInfo, getUserRoles } from '../../redux/slices/user';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -12,27 +12,29 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isButtonActive, setIsButtonActive] = useState(false);
-  const authenticationService = useAuthentication();      
+  //const authenticationService = useAuthentication();      
   //const parametrerUserService = useParametrerUser();
-  
+
 
   const handleSignIn = () => {
     const loginUser = { email, password };
-    dispatch(fetchToken(loginUser)).then( () => {
-      dispatch(getUserInfo()).then((data) => {
-        console.log(data)
-        navigate(`/home`);
-        /*
-        if (data.token === "error") {
-          navigate(`/badAuthentication`);
-        }
-        else {
-          parametrerUserService();
+    dispatch(fetchToken(loginUser)).then(() => {
+      dispatch(getUserRoles()).then(() => {
+        dispatch(getUserInfo()).then((data) => {
+          console.log(data)
           navigate(`/home`);
-        }*/
+          /*
+          if (data.token === "error") {
+            navigate(`/badAuthentication`);
+          }
+          else {
+            parametrerUserService();
+            navigate(`/home`);
+          }*/
+        })
       })
     });
-      
+
   };
 
   const handleKeyUp = (event) => {

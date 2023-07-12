@@ -51,7 +51,7 @@ function Header() {
           <span className="me-auto">DocPuting</span>
           {isLogin ? (
             <div>
-              <h6>Bonjour {connectedUser.firstName}</h6>
+              <h6>Bonjour {connectedUser.firstname}</h6>
               <Link
                 to="/logout"
                 className="btn btn-outline-info ms-1"

@@ -1,6 +1,6 @@
 // redux/reducers/index.js
 import { combineReducers } from 'redux';
-import userReducer from './userReducer';
+//import userReducer from './userReducer';
 import rdvReducer from './rdvReducer';
 import rdvListReducer from './rdvListReducer';
 import appelServiceReducer from './appelServiceReducer';

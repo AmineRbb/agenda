@@ -1,7 +1,7 @@
 // redux/reducers/userReducer.js
-export const setUser = (user) => ({
-  type: 'SET_USER',
-  payload: user,
+export const setUser = (connectedUser) => ({
+  type: 'SET_CONNECTEDUSER',
+  payload: connectedUser,
 });
 
 export const disconnect = () => ({
@@ -26,11 +26,12 @@ const initialState = {
   isLogin: false,
   isAdmin: false,
   isPro: false,
+  roles:{}
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_USER':
+    case 'SET_CONNECTEDUSER':
       return {
         ...state,
         isLogin: true,
