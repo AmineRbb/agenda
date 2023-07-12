@@ -18,6 +18,7 @@ import Inscrit from "./authentication/Inscrit";
 import BadAuthentication from "./authentication/BadAuthentication";
 import NotAuthorized from "./authentication/NotAuthorized";
 import InfoModifier from "./parametres/InfoModifier";
+import CalendarCreeNotif from './creeRdv/CalendarCreeNotif';
 
 
 function Body() {
@@ -29,6 +30,7 @@ function Body() {
                 <Route path="/agenda" element={<Agenda />}></Route>
                 <Route path="/reserverRdv" element={<Reserver />}></Route>
                 <Route path="/programmerRdv" element={<Programmer />}></Route>
+                <Route path="/listRdvProgramme" element={<CalendarCreeNotif />}></Route>
                 <Route path="/parametresUser" element={<ParametrerUser />}></Route>
                 <Route path="/parametresAdmin" element={<ParametrerAdmin />}></Route>
                 <Route path="/logout" element={<Logout />}></Route>
@@ -36,19 +38,10 @@ function Body() {
                 <Route path="/login" element={<Login />}></Route>
                 <Route path="/register" element={<Register />}></Route>
                 <Route path="/admin/ajouterRole" element={<AjouterRole />}></Route>
-                <Route
-                    path="/admin/supprimerRole"
-                    element={<SupprimerRole />}
-                ></Route>
-                <Route
-                    path="/admin/supprimerUtilisateur"
-                    element={<SupprimerUtilisateur />}
-                ></Route>
+                <Route path="/admin/supprimerRole" element={<SupprimerRole />}></Route>
+                <Route path="/admin/supprimerUtilisateur" element={<SupprimerUtilisateur />}></Route>
                 <Route path="/inscrit" element={<Inscrit />}></Route>
-                <Route
-                    path="/badAuthentication"
-                    element={<BadAuthentication />}
-                ></Route>
+                <Route path="/badAuthentication" element={<BadAuthentication />}></Route>
                 <Route path="/notAuthorized" element={<NotAuthorized />}></Route>
                 <Route path="*" element={<NotExist />}></Route>
                 <Route path="/modifieNotif" element={<ModifierUser />}></Route>

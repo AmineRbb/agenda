@@ -1,5 +1,5 @@
 // redux/reducers/userReducer.js
-export const setUser = (connectedUser) => ({
+/*export const setUser = (connectedUser) => ({
   type: 'SET_CONNECTEDUSER',
   payload: connectedUser,
 });
@@ -67,4 +67,4 @@ const userReducer = (state = initialState, action) => {
   }
 };
 
-export default userReducer;
+export default userReducer;*/

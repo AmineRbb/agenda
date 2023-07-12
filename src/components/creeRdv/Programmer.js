@@ -1,10 +1,14 @@
 import { faMagnifyingGlass, faPaperPlane, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { creeCalendar } from '../../redux/slices/rdv';
 
 function Programmer() {
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user =  useSelector((state) => state.userSlice);
   const token = localStorage["agendaToken"]; 
   const nameee = JSON.stringify(user);
@@ -23,12 +27,31 @@ function Programmer() {
     jourDisponible: '',
 });
 
+    const handleCreateCalendar = () => {
+        dispatch(creeCalendar(data)).then(() => {
+            navigate(`/listRdvProgramme`);
+        })
+    }
+
+    const handleSeeProgramCalendar = () => {
+        navigate(`/home`);
+    }
+
   return (
     <div>
       <div className="p-1 m-1">
         <div className="card">
           <div className="card-body">
+            <h6>Voir les disponibilités déjà programmer</h6>
+          <div className="text-center">
+                        <button
+                            onClick={(handleSeeProgramCalendar)}
+                            className="btn btn-outline-secondary"> Voir Disponibilités 
+                            <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon>
+                        </button></div> 
+                        <br /><br />
             <h6>Programmer une plage de rendez-vous disponible pour vos clients</h6>
+            
             <div>
                     <table className="table table-light">
                         <tbody>
@@ -115,12 +138,12 @@ function Programmer() {
                         </tbody>
                     </table>
 
-                    <h6 className="text-center">
+                    <div className="text-center">
                         <button
-                            
-                            className="btn btn-outline-secondary"> S'inscrire
+                            onClick={handleCreateCalendar}
+                            className="btn btn-outline-secondary"> Programmer des Disponibilités
                             <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon>
-                        </button></h6></div>
+                        </button></div></div>
           
           </div>
         </div>

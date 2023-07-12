@@ -1,25 +1,25 @@
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { getAllRdvService } from '../service/serviceRdv';
+import { deleteRdv, getAllRdv } from '../redux/slices/rdv';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Agenda() {
   const [data, setData] = useState({
     utilisateur: '',
   });
-  const [rdvList, setRdvList] = useState([]);
+  const rdvSlice = useSelector((state) => state.rdvSlice);
+  const isLoggedIn = useSelector((state) => state.userSlice.isLoggedIn);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  
   const token = localStorage["agendaToken"]; 
+  //const isLoading = useSelector((state) => state.userSlice.isLoading);
 
-  /*const token = useSelector((state) => {
-    var tmpToken = state.user.token;
-    return tmpToken;
-  }
-  );*/
 
-  useEffect(() => {
+  /*useEffect(() => {
     const fetchData = async () => {
       if (token !== "notlogin") {
         const headers = {
@@ -42,11 +42,25 @@ function Agenda() {
     };
 
     fetchData();
-  }, [navigate, token]);
+  }, [navigate, token]);*/
+
+ //&& !isLoading
+ 
+  if (isLoggedIn && (new Date().getTime()-rdvSlice.lastFetch)>3000) {
+    dispatch(getAllRdv()).then((data)=> {
+      if (data.pageReturn === "error") {
+        navigate(`/home`);
+      }
+    })
+  }
 
 
-
-
+  const handleDeleteRdv = (rdv) => {
+    dispatch(deleteRdv(rdv.nameRdv)).then((data) => {
+      dispatch(getAllRdv()).then((data)=> {
+      }) 
+    })
+  }
 
   return (
     <div className="p-1 m-1">
@@ -92,7 +106,7 @@ function Agenda() {
              </tr>
             </thead>
             <tbody>
-              {rdvList.map((rdv) => (
+              {rdvSlice.rdvList.map((rdv) => (
                 <tr key={rdv.rdvId}>
                   <td>{rdv.nameRdv}</td>
                   <td>{rdv.client}</td>
@@ -100,6 +114,12 @@ function Agenda() {
                   <td>{rdv.dateDuRendezVous}</td>
                   <td>{rdv.dureeRendezVous}</td>
                   <td>{rdv.description}</td>
+                  <td>
+                    <button onClick={() => handleDeleteRdv(rdv)}
+                    className="btn btn-outline-succes">
+                      <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

@@ -1,4 +1,4 @@
-export const setAppelService = (isLoginAppel) => ({
+/*export const setAppelService = (isLoginAppel) => ({
     type: 'SET_ISLOGINAPPEL',
     payload: isLoginAppel,
 });
@@ -20,4 +20,4 @@ const appelServiceReducer = (state = initialState, action) => {
     }
 };
 
-export default appelServiceReducer;
+export default appelServiceReducer;*/

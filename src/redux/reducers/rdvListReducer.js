@@ -1,4 +1,4 @@
-export const setRdvList = (rdvList) => ({
+/*export const setRdvList = (rdvList) => ({
     type: 'SET_RDVLIST',
     payload: rdvList,
 });
@@ -31,4 +31,4 @@ const rdvListReducer = (state = initialState, action) => {
     }
 };
 
-export default rdvListReducer;
+export default rdvListReducer;*/

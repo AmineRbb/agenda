@@ -69,7 +69,7 @@ export const addRole = createAsyncThunk('addRole', async (dto) => {
     Authorization: `Bearer ${token}`,
   };
   try {
-    const response = await axios.get(backendUrl + 'admin/addRoleUtilisateur', dto, { headers });
+    const response = await axios.get(backendUrl + '/admin/addRoleUtilisateur', dto, { headers });
     return response.data;
   } catch (error) {
     const updatedData = {
@@ -87,7 +87,7 @@ export const deleteRole = createAsyncThunk('deleteRole', async (dto) => {
     Authorization: `Bearer ${token}`,
   };
   try {
-    const response = await axios.get(backendUrl + 'admin/removeRoleUtilisateur', dto, { headers });
+    const response = await axios.get(backendUrl + '/admin/removeRoleUtilisateur', dto, { headers });
     return response.data;
   } catch (error) {
     const updatedData = {
@@ -105,7 +105,7 @@ export const deleteUser = createAsyncThunk('deleteUser', async (dto) => {
     Authorization: `Bearer ${token}`,
   };
   try {
-    const response = await axios.get(backendUrl + 'admin/deleteUtilisateur', dto, { headers });
+    const response = await axios.get(backendUrl + '/admin/deleteUtilisateur', dto, { headers });
     return response.data;
   } catch (error) {
     const updatedData = {
@@ -116,6 +116,7 @@ export const deleteUser = createAsyncThunk('deleteUser', async (dto) => {
 
   }
 });
+
 
 
 
@@ -176,6 +177,10 @@ const userSlice = createSlice({
     });
     builder.addCase(getUserInfo.pending, (state, action) => {
       state.isLoading = true;
+    });
+    builder.addCase(getUserInfo.rejected, (state, action) => {
+      state.isLoading = false;
+      console.error(action.payload);
     });
     builder.addCase(addRole.fulfilled, (state, action) => {
 
