@@ -12,8 +12,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isButtonActive, setIsButtonActive] = useState(false);
-  //const authenticationService = useAuthentication();      
-  //const parametrerUserService = useParametrerUser();
+
 
 
   const handleSignIn = () => {

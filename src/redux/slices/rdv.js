@@ -144,7 +144,7 @@ export const voirCalendrierType = createAsyncThunk('voirCalendrierType', async (
     };
   
     try {
-      const response = await axios.post(backendUrl + '/pro/voirCalendrierPro', rdvDto, { headers });
+      const response = await axios.post(backendUrl + '/pro/voirRdvCalendrierPro', rdvDto, { headers });
       return response.data;
     } catch (error) {
       const updatedData = {
@@ -164,6 +164,8 @@ const rdvSlice = createSlice({
     oneRdv:null,
     rdvList: [],
     isLoading: false,
+    professionnel:'',
+    type:'',
     lastFetch: new Date(2000,1,1).getTime(),
     calendarList:[]
   },
@@ -185,6 +187,7 @@ const rdvSlice = createSlice({
       });
     builder.addCase(getOneRdv.fulfilled, (state, action) => {
       state.isLoading = false;
+      // TOD : affecter le payload
     });
     builder.addCase(getOneRdv.pending, (state, action) => {
       state.isLoading = true;
@@ -203,6 +206,18 @@ const rdvSlice = createSlice({
     builder.addCase(reserveRdv.pending, (state, action) => {
       state.isLoading = true;
     });
+    builder.addCase(creeCalendar.fulfilled, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(creeCalendar.pending, (state, action) => {
+        state.isLoading = true;
+    });
+    builder.addCase(supprCalendar.fulfilled, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(supprCalendar.pending, (state, action) => {
+        state.isLoading = true;
+    });
     builder.addCase(voirCalendrierType.fulfilled, (state, action) => {
         state.isLoading = false;
     });
@@ -210,7 +225,7 @@ const rdvSlice = createSlice({
         state.isLoading = true;
     });
     builder.addCase(voirCalendrierPro.fulfilled, (state, action) => {
-
+        state.calendarList = action.payload;
         state.isLoading = false;
     });
     builder.addCase(voirCalendrierPro.pending, (state, action) => {

@@ -19,6 +19,8 @@ import BadAuthentication from "./authentication/BadAuthentication";
 import NotAuthorized from "./authentication/NotAuthorized";
 import InfoModifier from "./parametres/InfoModifier";
 import CalendarCreeNotif from './creeRdv/CalendarCreeNotif';
+import ErrorCreationCal from './creeRdv/errorCreationCal';
+import ListCalendarProgrammer from './creeRdv/ListCalendarProgrammer';
 
 
 function Body() {
@@ -30,7 +32,9 @@ function Body() {
                 <Route path="/agenda" element={<Agenda />}></Route>
                 <Route path="/reserverRdv" element={<Reserver />}></Route>
                 <Route path="/programmerRdv" element={<Programmer />}></Route>
-                <Route path="/listRdvProgramme" element={<CalendarCreeNotif />}></Route>
+                <Route path="/calendarCree" element={<CalendarCreeNotif />}></Route>
+                <Route path="/listRdvProgramme" element={<ListCalendarProgrammer />}></Route>
+                <Route path="/errorCreationCal" element={<ErrorCreationCal />}></Route>
                 <Route path="/parametresUser" element={<ParametrerUser />}></Route>
                 <Route path="/parametresAdmin" element={<ParametrerAdmin />}></Route>
                 <Route path="/logout" element={<Logout />}></Route>

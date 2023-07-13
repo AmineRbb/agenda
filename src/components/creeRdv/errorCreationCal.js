@@ -3,16 +3,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function CalendarCreeNotif() {
+function ErrorCreationCal() {
     const navigate = useNavigate();
     return (
         <div className="p-1 m-1">
             <div className="card">
                 <div className="card-body">
-                    <h6>Le calendrier a été crée.</h6>
+                    <h6>Le nom d'utilisateur ou le mot de passe ne correspondent pas.</h6>
                     <div className="text-center">
                         <h6><button
-                            onClick={() => navigate(`/programmeRdv`)}
+                            onClick={() => navigate(`/programmerRdv`)}
                             className="btn btn-outline-secondary"> 
                             <FontAwesomeIcon icon={faRotateLeft}></FontAwesomeIcon> Retour
                         </button></h6></div>
@@ -22,4 +22,4 @@ function CalendarCreeNotif() {
     )
 }
 
-export default CalendarCreeNotif
+export default ErrorCreationCal

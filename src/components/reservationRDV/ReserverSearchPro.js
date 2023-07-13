@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { voirCalendrierPro } from '../../redux/slices/rdv';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDispatch, useSelector } from 'react-redux';
 
-function ListCalendarProgrammer() {
+function ReserverSearchPro() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user =  useSelector((state) => state.userSlice);
+  const isLoggedIn = useSelector((state) => state.userSlice.isLoggedIn);
   const rdvSlice = useSelector((state) => state.rdvSlice);
 
 
@@ -25,7 +26,17 @@ function ListCalendarProgrammer() {
     jourDisponible: '',
 });
 
+const profession = {
+    professionnel:'adm'
+}
 
+if (isLoggedIn && (new Date().getTime()-rdvSlice.lastFetch)>3000) {
+        dispatch(voirCalendrierPro(profession)).then((data) => {
+            if (data.pageReturn === "error") {
+                navigate(`/home`);
+              }
+        })
+    }
 
     const handleSeeProgramCalendar = () => {
         navigate(`/home`);
@@ -39,11 +50,10 @@ function ListCalendarProgrammer() {
     }
 
     return (
-      {}
         <div className="p-1 m-1">
       <div className="card">
         <div className="card-body">
-          <h3>List de vos disponibilités</h3>
+          <h3>Liste des Rendez-Vous Disponibles :</h3>
           <div className="card">
         <div className="card-body">
           <table style={{ borderSpacing: '10px', tableLayout: 'fixed' }}>
@@ -87,7 +97,7 @@ function ListCalendarProgrammer() {
     )
 }
 
-export default ListCalendarProgrammer
+export default ReserverSearchPro
 
 
 /* <th>

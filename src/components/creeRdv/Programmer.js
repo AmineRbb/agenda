@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { creeCalendar } from '../../redux/slices/rdv';
+import { creeCalendar, voirCalendrierPro } from '../../redux/slices/rdv';
 
 function Programmer() {
 
@@ -24,17 +24,23 @@ function Programmer() {
     minuteDebut: '',
     minuteFin: '',
     dureeRdv: '',
-    jourDisponible: '',
+    jourDisponible: [true, true, true, true, true, false, false],
 });
 
     const handleCreateCalendar = () => {
         dispatch(creeCalendar(data)).then(() => {
-            navigate(`/listRdvProgramme`);
+            //if ca na pas 403 :
+            navigate(`/calendarCree`);
+            //else : renvoyer errorCreationCal
         })
     }
 
     const handleSeeProgramCalendar = () => {
-        navigate(`/home`);
+        const profession = {
+            professionnel:'admin@gmail.com'
+        }
+        dispatch(voirCalendrierPro(profession));
+        navigate(`/listRdvProgramme`);
     }
 
   return (
@@ -46,7 +52,7 @@ function Programmer() {
           <div className="text-center">
                         <button
                             onClick={(handleSeeProgramCalendar)}
-                            className="btn btn-outline-secondary"> Voir Disponibilités 
+                            className="btn btn-outline-secondary"> Visualiser vos Disponibilités 
                             <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon>
                         </button></div> 
                         <br /><br />
@@ -90,7 +96,7 @@ function Programmer() {
                             <tr>
                                 <td>Minute du Début des Rendez-Vous</td>
                                 <td><input
-                                    value={data.heureDebut}
+                                    value={data.minuteDebut}
                                     className="form-control"
                                     onChange={(e) => setData({ ...data, minuteDebut: e.target.value })}
                                 ></input></td>
@@ -127,14 +133,7 @@ function Programmer() {
                                     onChange={(e) => setData({ ...data, dureeRdv: e.target.value })}
                                 ></input></td>
                             </tr>
-                            <tr>
-                                <td>Liste des jours ou vous êtes Disponible</td>
-                                <td><input
-                                    value={data.jourDisponible}
-                                    className="form-control"
-                                    onChange={(e) => setData({ ...data, jourDisponible: e.target.value })}
-                                ></input></td>
-                            </tr>
+                            
                         </tbody>
                     </table>
 
@@ -159,3 +158,12 @@ function Programmer() {
 export default Programmer
 
 //onClick={handleSignup}
+
+/* <tr>
+                                <td>Liste des jours ou vous êtes Disponible</td>
+                                <td><input
+                                    value={data.jourDisponible}
+                                    className="form-control"
+                                    onChange={(e) => setData({ ...data, jourDisponible: e.target.value })}
+                                ></input></td>
+                            </tr> */
