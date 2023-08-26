@@ -2,9 +2,9 @@ import { faCircleCheck, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuthentication, useParametrerUser } from '../../service/service';
 import { useDispatch } from 'react-redux';
 import { fetchToken, getUserInfo, getUserRoles } from '../../redux/slices/user';
+import { getAllRdv } from '../../redux/slices/rdv';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -13,27 +13,21 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [isButtonActive, setIsButtonActive] = useState(false);
 
-
-
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     const loginUser = { email, password };
-    dispatch(fetchToken(loginUser)).then(() => {
+    try {
+      await dispatch(fetchToken(loginUser)).unwrap(); // Utilisez .unwrap() pour obtenir la valeur résolue
       dispatch(getUserRoles()).then(() => {
-        dispatch(getUserInfo()).then((data) => {
-          console.log(data)
-          navigate(`/home`);
-          /*
-          if (data.token === "error") {
-            navigate(`/badAuthentication`);
-          }
-          else {
-            parametrerUserService();
+        dispatch(getUserInfo()).then(() => {
+          dispatch(getAllRdv()).then(() => {
             navigate(`/home`);
-          }*/
-        })
-      })
-    });
-
+          });
+        });
+      });
+    } catch (error) {
+      console.error(error);
+      navigate(`/badAuthentication`);
+    }
   };
 
   const handleKeyUp = (event) => {
@@ -74,17 +68,18 @@ const Login = () => {
               </tr>
             </tbody>
           </table>
-          <h6 className="text-center">
-            <button
-              onClick={handleSignIn}
-              className="btn btn-success"
-              style={{ marginRight: '10px', marginTop: '5px' }}
-              disabled={!isButtonActive}
-            >
-              <FontAwesomeIcon icon={faCircleCheck}></FontAwesomeIcon> Connexion
-            </button>
-          </h6>
-
+          <div>
+            <h6 className="text-center">
+              <button
+                onClick={handleSignIn}
+                className="btn btn-success"
+                style={{ marginRight: '10px', marginTop: '5px' }}
+                disabled={!isButtonActive}
+              >
+                <FontAwesomeIcon icon={faCircleCheck}></FontAwesomeIcon> Connexion
+              </button>
+            </h6>
+          </div>
           <div className="card">
             <div className="card-body bg-light">
               <div className="col-lg-6">
@@ -106,6 +101,5 @@ const Login = () => {
     </div>
   )
 }
-
 
 export default Login

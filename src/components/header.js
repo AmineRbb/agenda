@@ -1,54 +1,29 @@
-import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
-import { useIsLoggedIn, useParametrerUser } from "../service/service";
 
 function Header() {
- // const isLoginService = useIsLoggedIn();
-  //const isLoginAppel = useSelector((state) => state.appelService.isLoginAppel);
   const isLogin = useSelector((state) => state.userSlice.isLoggedIn);
   const connectedUser = useSelector((state) => {
     return state.userSlice.connectedUser;
   });
-
-
   const isAdmin = useSelector((state) => state.userSlice.isAdmin);
   const isPro = useSelector((state) => state.userSlice.isPro);
 
-  let adminLink = "/login";
-  let profileLink = "/login";
-  let programmerLink = "/login";
   let agendaLink = "/login";
 
-
-
   if (isLogin) {
-
     agendaLink = "/agenda";
-    profileLink = "/parametresUser";
-
-    if (isPro) {
-      programmerLink = "/programmerRdv";
-    }
-    else {
-      programmerLink = "/notAuthorized";
-    }
-
-    if (isAdmin) {
-      adminLink = "/parametresAdmin";
-    } else {
-      adminLink = "/notAuthorized";
-    }
   }
 
   return (
     <>
       <div>
         <h1 className="d-flex justify-content-between align-items-center">
-          <span className="me-auto">DocPuting</span>
+          <span className="me-auto">Meetings</span>
           {isLogin ? (
             <div>
               <h6>Bonjour {connectedUser.firstname}</h6>
@@ -99,7 +74,7 @@ function Header() {
             {isPro && (
               <li>
                 <Link
-                  to={programmerLink}
+                  to="/programmerRdv"
                   className="custom-title btn btn-outline-info ms-1"
                 >
                   Programmer
@@ -109,7 +84,7 @@ function Header() {
             {isLogin && (
               <li>
                 <Link
-                  to={profileLink}
+                  to="/parametresUser"
                   className="custom-title btn btn-outline-info ms-1"
                 >
                   Profile
@@ -119,7 +94,7 @@ function Header() {
             {isAdmin && (
               <li>
                 <Link
-                  to={adminLink}
+                  to="/parametresAdmin"
                   className="custom-title btn btn-outline-info ms-1"
                 >
                   Admin

@@ -41,3 +41,8 @@
   width:135px; 
   padding: 5px 10px;
 }
+
+.btn-active {
+  background-color: #007bff; /* Couleur du bouton actif */
+  color: #fff; /* Couleur du texte du bouton actif */
+}

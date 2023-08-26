@@ -1,9 +1,9 @@
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { ajouterRoleService } from '../../../service/service';
+import { addRole } from '../../../redux/slices/user';
 
 function AjouterRole() {
   const [data, setData] = useState({
@@ -11,43 +11,22 @@ function AjouterRole() {
     role: '',
   });
   const navigate = useNavigate();
-  const token = localStorage["agendaToken"]; 
+  const dispatch = useDispatch();
 
-  //const token = useSelector((state) => {
-  //  var tmpToken = state.user.token;
-  //  return tmpToken;
-  //}
-  //);
-
-  /*if (token === "notlogin") {
-    navigate(`/login`);
-  };*/
-
-  const handleAddRole = () => {
-    if (token !== "notlogin") {
-      const headers = {
-        Authorization: `Bearer ${token}`,
-      };
-      const dto = { 
-        role : `${data.role}`,
-        userParam : `${data.utilisateur}`
+  const handleAddRole = async () => {
+    try {
+      const dto = {
+        role: `${data.role}`,
+        userParam: `${data.utilisateur}`
       }
 
-      ajouterRoleService(headers, dto)
-        .then((response) => {
-          if(response.booleanPage===true){
-          navigate(`/home`);
-          }
-          else{
-            navigate(`/modifieNotif`);
-          }
-
-        })
-    }
-    else {
+      await dispatch(addRole(dto)).unwrap();
+      navigate(`/infoModifier`);
+    } catch (error) {
+      console.error(error);
       navigate(`/notAuthorized`);
     }
-  };
+  }
 
 
   return (

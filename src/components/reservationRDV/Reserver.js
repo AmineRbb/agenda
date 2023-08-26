@@ -1,9 +1,9 @@
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getAllRdv, voirCalendrierPro } from '../../redux/slices/rdv';
+import { getAllRdv, voirCalendrierPro, voirCalendrierType } from '../../redux/slices/rdv';
 
 
 function Reserver() {
@@ -13,15 +13,31 @@ function Reserver() {
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const rdvSlice = useSelector((state) => state.rdvSlice);
-  const isLoggedIn = useSelector((state) => state.userSlice.isLoggedIn);
 
-  const handleSearchCalendrierPro = () => {
-    dispatch(voirCalendrierPro(data.pro)).then((data) => {
-      dispatch(getAllRdv()).then((data)=> {
-        navigate(``);
-      }) 
-    })
+  const handleSearchCalendrierPro = async () => {
+    try {
+      const sendObject = { professionnel: data.pro };
+      await dispatch(voirCalendrierPro(sendObject)).unwrap();
+      await dispatch(getAllRdv()).unwrap();
+      navigate(`/reserverSearchProfessionnel`);
+    }
+    catch (error) {
+      console.error(error);
+      navigate(`/errorCode`);
+    }
+  }
+
+  const handleSearchCalendrierType = async () => {
+    try {
+      const sendObject = { type: data.type };
+      await dispatch(voirCalendrierType(sendObject)).unwrap();
+      await dispatch(getAllRdv()).unwrap();
+      navigate(`/reserverSearchProfessionnel`);
+    }
+    catch (error) {
+      console.error(error);
+      navigate(`/errorCode`);
+    }
   }
 
 
@@ -33,26 +49,26 @@ function Reserver() {
           <div className="d-flex align-items-center">
             <h6>Chercher un domaine de profession</h6>
             <input
-              value={data.utilisateur}
+              value={data.type}
               className="form-control me-2"
-              onChange={(e) => setData({ ...data, utilisateur: e.target.value })}
+              onChange={(e) => setData({ ...data, type: e.target.value })}
               style={{ maxWidth: '350px' }}
             ></input>
-            <button onClick={handleSearchCalendrierPro} className="btn btn-outline-secondary">
-                <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
-              </button>
+            <button onClick={handleSearchCalendrierType} className="btn btn-outline-secondary">
+              <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
+            </button>
           </div>
           <div className="d-flex align-items-center">
             <h6>Chercher un professionnel </h6>
             <input
-              value={data.utilisateur}
+              value={data.pro}
               className="form-control me-2"
-              onChange={(e) => setData({ ...data, utilisateur: e.target.value })}
-              style={{ maxWidth: '350px' }} 
+              onChange={(e) => setData({ ...data, pro: e.target.value })}
+              style={{ maxWidth: '350px' }}
             ></input>
             <button onClick={handleSearchCalendrierPro} className="btn btn-outline-secondary">
-                <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
-              </button>
+              <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
+            </button>
           </div>
         </div>
       </div>

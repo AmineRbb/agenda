@@ -2,50 +2,34 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { supprimerRoleService } from '../../../service/service';
-import { useSelector } from 'react-redux';
+import { deleteRole } from '../../../redux/slices/user';
+import { useDispatch } from 'react-redux';
 
 function SupprimerRole() {
   const [data, setData] = useState({
     utilisateur:'',
     role:'',
   });
-  const navigate = useNavigate();
-  const token = localStorage["agendaToken"]; 
+  const navigate = useNavigate(); 
+  const dispatch = useDispatch();
 
-  //const token = useSelector((state) => {
-  //  var tmpToken = state.user.token;
-  //  return tmpToken;
-  //}
-  //);
-
-
-
-  const handleDeleteRole = () => {
-    if (token !== "notlogin") {
-      const headers = {
-        Authorization: `Bearer ${token}`,
-      };
-      const dto = { 
-        role : `${data.role}`,
-        userParam : `${data.utilisateur}`
+  const handleDeleteRole = async () => {
+    try {
+      const dto = {
+        role: `${data.role}`,
+        userParam: `${data.utilisateur}`
       }
 
-      supprimerRoleService(headers, dto)
-        .then((response) => {
-          if(response.booleanPage===true){
-            navigate(`/home`);
-            }
-            else{
-              navigate(`/modifieNotif`);
-            }
-
-        })
+      await dispatch(deleteRole(dto)).unwrap();
+      navigate(`/infoModifier`);
     }
-    else {
+    catch (error) {
+      console.error(error);
       navigate(`/notAuthorized`);
     }
-  };
+  }
+
+
 
   return (
     <div className="p-1 m-1">

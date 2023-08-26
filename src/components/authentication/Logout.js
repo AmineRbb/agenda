@@ -1,7 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { disconnect } from '../../redux/reducers/userReducer';
+import { disconnect } from '../../redux/slices/user';
+
 
 function Logout() {
   const navigate = useNavigate();

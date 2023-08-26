@@ -1,50 +1,32 @@
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { supprimerUtilisateurService } from '../../../service/service';
+import { deleteUser } from '../../../redux/slices/user';
+import { useDispatch } from 'react-redux';
 
 function SupprimerUtilisateur() {
   const [data, setData] = useState({
     utilisateur:'',
   });
   const navigate= useNavigate();
-  const token = localStorage["agendaToken"]; 
-  //const token = useSelector((state) => {
-  //  var tmpToken = state.user.token;
-  //  return tmpToken;
-  //}
-  //);
-  /*if (token === "notlogin") {
-    navigate(`/login`);
-  };*/
+  const dispatch = useDispatch();
 
-
-  const handleDeleteUser = () => {
-    if (token !== "notlogin") {
-      const headers = {
-        Authorization: `Bearer ${token}`,
-      };
-      const dto = { 
-        userParam : `${data.utilisateur}`
+  const handleDeleteUser = async () => {
+    try {
+      const dto = {
+        userParam: `${data.utilisateur}`
       }
 
-      supprimerUtilisateurService(headers, dto)
-        .then((response) => {
-          if(response.booleanPage===true){
-            navigate(`/home`);
-            }
-            else{
-              navigate(`/modifieNotif`);
-            }
-
-        })
+      await dispatch(deleteUser(dto)).unwrap();
+      navigate(`/infoModifier`);
     }
-    else {
+    catch (error) {
+      console.error(error);
       navigate(`/notAuthorized`);
     }
-  };
+  }
+
   
   return (
     <div className="p-1 m-1">

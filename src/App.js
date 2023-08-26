@@ -16,5 +16,4 @@ function App() {
     </BrowserRouter>
   );
 }
-/// {withAuthorization(['admin'])(ParametrerAdmin)} />
 export default App;

@@ -1,56 +1,19 @@
-import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { getUserInfo, useParametrerUser } from '../../service/service';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 function ParametrerUser() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  //const token = localStorage["agendaToken"];
   const users = useSelector((state) => state.userSlice.connectedUser);
- /*   if(users.firstName===""){
-      dispatch(getUserInfo()).then((data) => {
-        console.log(data)
-        if(data.pageReturn!=="error"){
-        } else {
-          navigate(`/login`);
-        }});
-  };*/
-  /*const loginUser = { email, password };
-    dispatch(getUserInfo()).then((data) => {
-        console.log(data)
-        if(data.pageReturn!=="error"){
-        
-        } else {
-          navigate(`/login`);
-        }*/
+  const roles = useSelector((state) => state.userSlice.roles);
 
-        /*
-        if (data.token === "error") {
-          navigate(`/badAuthentication`);
-        }
-        else {
-          parametrerUserService();
-          navigate(`/home`);
-        }*/
-   //   });
- /* const parametrerUserService = useParametrerUser();
-
-  if (!!token || !!users.email) {
-    
-    parametrerUserService()
-      .then((response) => {
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  } else {
-    navigate(`/login`);
-  }
-*/
+  const datePrint = new Date(users.dateOfBirth);
+  const day = datePrint.getDate(); 
+  const month = datePrint.getMonth() + 1; 
+  const year = datePrint.getFullYear(); 
+  const datePrintable = `${day}/${month}/${year}`;
 
   return (
     <div className="p-1 m-1">
@@ -75,7 +38,7 @@ function ParametrerUser() {
                   </tr>
                   <tr>
                     <td>Date de naissance</td>
-                    <td>{users.dateOfBirth}</td>
+                    <td>{datePrintable}</td>
                   </tr>
                   <tr>
                     <td>Numéro de téléphone</td>
@@ -90,8 +53,12 @@ function ParametrerUser() {
                     <td>{users.city}</td>
                   </tr>
                   <tr>
-                    <td>Rôle principal</td>
-                    <td>{users.rolePrincipale}</td>
+                    <td>Roles</td>
+                    {roles.map((rol) => (
+                      <tr key={rol.id}>
+                        <td>{rol.name}</td>
+                      </tr>
+                    ))}
                   </tr>
                 </tbody>
               </table>

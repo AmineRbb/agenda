@@ -13,9 +13,10 @@ function BadAuthentication() {
                     <div className="text-center">
                         <h6><button
                             onClick={() => navigate(`/login`)}
-                            className="btn btn-outline-secondary"> 
+                            className="btn btn-outline-secondary">
                             <FontAwesomeIcon icon={faRotateLeft}></FontAwesomeIcon> Retour
-                        </button></h6></div>
+                        </button></h6>
+                    </div>
                 </div>
             </div>
         </div>

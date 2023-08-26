@@ -21,6 +21,10 @@ import InfoModifier from "./parametres/InfoModifier";
 import CalendarCreeNotif from './creeRdv/CalendarCreeNotif';
 import ErrorCreationCal from './creeRdv/errorCreationCal';
 import ListCalendarProgrammer from './creeRdv/ListCalendarProgrammer';
+import ErrorCode from './authentication/errorCode';
+import ReserverSearchPro from './reservationRDV/ReserverSearchPro';
+import RdvReserver from './reservationRDV/RdvReserver';
+
 
 
 function Body() {
@@ -50,6 +54,9 @@ function Body() {
                 <Route path="*" element={<NotExist />}></Route>
                 <Route path="/modifieNotif" element={<ModifierUser />}></Route>
                 <Route path="/infoModifier" element={<InfoModifier />}></Route>
+                <Route path="/errorCode" element={<ErrorCode />}></Route>
+                <Route path="/reserverSearchProfessionnel" element={<ReserverSearchPro />}></Route>
+                <Route path="/rdvReserver" element={<RdvReserver />}></Route>
             </Routes>
         </div>
     )

@@ -3,8 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { registerService } from '../../service/service';
-import { setUser } from '../../redux/reducers/userReducer';
+import { register } from '../../redux/slices/user';
 
 function Register() {
     const [data, setData] = useState({
@@ -13,27 +12,26 @@ function Register() {
         lastname: '',
         dateOfBirth: '',
         phoneNumber: '',
-        address: '',
+        adress: '',
         city: '',
-        rolePrincipale: '',
     });
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleSignup = () => {
+    const handleSignup = async () => {
+        try {
 
-        registerService(data)
-            .then((dataResponse) => {
-                if (dataResponse.token === "error") {
-                    navigate(`/badAuthentication`);
-                }
-                else {
-                    dispatch(setUser(dataResponse));
-                    navigate(`/inscrit`);
-                }
-            })
+            const [day, month, year] = data.dateOfBirth.split("/");
+            const realDateOfBirth = new Date(year, month - 1, day);
+            const updatedData = { ...data, dateOfBirth: realDateOfBirth };
 
+            await dispatch(register(updatedData)).unwrap();
+            navigate(`/inscrit`);
+        } catch (error) {
+            console.error(error);
+            navigate(`/errorCode`);
+        }
     };
 
     return (
@@ -117,14 +115,6 @@ function Register() {
                                     onChange={(e) => setData({ ...data, city: e.target.value })}
                                 ></input></td>
                             </tr>
-                            <tr>
-                                <td>Rôle principal</td>
-                                <td><input
-                                    value={data.rolePrincipale}
-                                    className="form-control"
-                                    onChange={(e) => setData({ ...data, rolePrincipale: e.target.value })}
-                                ></input></td>
-                            </tr>
                         </tbody>
                     </table>
 
@@ -133,7 +123,8 @@ function Register() {
                             onClick={handleSignup}
                             className="btn btn-outline-secondary">
                             <FontAwesomeIcon icon={faCircleCheck}></FontAwesomeIcon> S'inscrire
-                        </button></h6></div>
+                        </button></h6>
+                </div>
             </div>
         </div>
     )
