@@ -46,3 +46,15 @@
   background-color: #007bff; /* Couleur du bouton actif */
   color: #fff; /* Couleur du texte du bouton actif */
 }
+
+.root-container {
+  min-height: 100%;
+  position: relative;
+  flex: 1;
+}
+
+.container {
+  padding-bottom: 25px; /* Hauteur du pied de page */
+  min-width: 100%;
+}
+

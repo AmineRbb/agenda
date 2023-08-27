@@ -14,7 +14,7 @@ function Home() {
     <div className="p-1 m-1">
       <div className="card">
         <div className="card-body">
-          <h3>Bienvenue sur DocPuting, {connectedUser.firstname}</h3>
+          <h3>Bienvenue sur Meetings, {connectedUser.firstname}</h3>
           <h6>Trouver un rendez-vous avec un professionnel.</h6>
           <br />
           <div>
@@ -33,7 +33,7 @@ function Home() {
           </h6>
           <br /><br /><br /><br />
           <h6>Êtes vous un professionnel dans un domaine?</h6>
-          <p>Vous pouvez utiliser DocPuting afin de gerer vos rendez-vous avec vos clients. Vous pouvez
+          <p>Vous pouvez utiliser Meetings afin de gerer vos rendez-vous avec vos clients. Vous pouvez
             libérer du temps avec une gestion de vos rendez-vous beaucoup plus rapide et moderne.
             Vous pouvez améliorer l'accès à votre pratique professionnel quelle que soit le métier
             et ainsi gagner en confort de travail.

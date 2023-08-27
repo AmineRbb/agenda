@@ -43,36 +43,55 @@ function Reserver() {
 
   return (
     <div className="p-1 m-1">
-      <div className="card">
-        <div className="card-body">
-          <h5>Cherchez un rendez-vous en fonction de ce que vous rechercher</h5>
-          <div className="d-flex align-items-center">
-            <h6>Chercher un domaine de profession</h6>
-            <input
-              value={data.type}
-              className="form-control me-2"
-              onChange={(e) => setData({ ...data, type: e.target.value })}
-              style={{ maxWidth: '350px' }}
-            ></input>
-            <button onClick={handleSearchCalendrierType} className="btn btn-outline-secondary">
-              <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
-            </button>
-          </div>
-          <div className="d-flex align-items-center">
-            <h6>Chercher un professionnel </h6>
-            <input
-              value={data.pro}
-              className="form-control me-2"
-              onChange={(e) => setData({ ...data, pro: e.target.value })}
-              style={{ maxWidth: '350px' }}
-            ></input>
-            <button onClick={handleSearchCalendrierPro} className="btn btn-outline-secondary">
-              <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
-            </button>
-          </div>
-        </div>
+  <div className="card">
+    <div className="card-body">
+      <h5>Cherchez un rendez-vous en fonction de ce que vous recherchez</h5>
+      <div>
+        <table style={{ width: '100%' }}>
+          <tbody>
+            <tr>
+              <td style={{ verticalAlign: 'middle'}}>
+                <h6>Chercher un domaine de profession</h6>
+              </td>
+              <td style={{ width: '100%', paddingRight: '10px' }}>
+                <div className="d-flex align-items-center">
+                  <input
+                    value={data.type}
+                    className="form-control me-2"
+                    onChange={(e) => setData({ ...data, type: e.target.value })}
+                    style={{ maxWidth: '350px' }}
+                  />
+                  <button onClick={handleSearchCalendrierType} className="btn btn-outline-secondary">
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style={{ verticalAlign: 'middle' }}>
+                <h6>Chercher un professionnel</h6>
+              </td>
+              <td style={{ width: '100%', paddingRight: '10px' }}>
+                <div className="d-flex align-items-center">
+                  <input
+                    value={data.pro}
+                    className="form-control me-2"
+                    onChange={(e) => setData({ ...data, pro: e.target.value })}
+                    style={{ maxWidth: '350px' }}
+                  />
+                  <button onClick={handleSearchCalendrierPro} className="btn btn-outline-secondary">
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+  </div>
+</div>
+
   );
 }
 

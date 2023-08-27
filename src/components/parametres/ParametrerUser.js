@@ -10,10 +10,27 @@ function ParametrerUser() {
   const roles = useSelector((state) => state.userSlice.roles);
 
   const datePrint = new Date(users.dateOfBirth);
-  const day = datePrint.getDate(); 
-  const month = datePrint.getMonth() + 1; 
-  const year = datePrint.getFullYear(); 
+  const day = datePrint.getDate();
+  const month = datePrint.getMonth() + 1;
+  const year = datePrint.getFullYear();
   const datePrintable = `${day}/${month}/${year}`;
+
+  const recupRoles = (roles) => {
+    let infoFinal = "";
+    {
+
+      if (roles.name === "ADMIN") {
+        infoFinal = "administrateur";
+      }
+      if (roles.name === "PRO") {
+        infoFinal = "professionnel";
+      }
+      if (roles.name === "CLIENT") {
+        infoFinal = "client";
+      }
+    };
+    return infoFinal;
+  };
 
   return (
     <div className="p-1 m-1">
@@ -56,7 +73,7 @@ function ParametrerUser() {
                     <td>Roles</td>
                     {roles.map((rol) => (
                       <tr key={rol.id}>
-                        <td>{rol.name}</td>
+                        <td>{recupRoles(rol)}</td>
                       </tr>
                     ))}
                   </tr>

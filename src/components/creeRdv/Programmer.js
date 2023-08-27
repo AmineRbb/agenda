@@ -9,7 +9,7 @@ function Programmer() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const users = useSelector((state) => state.userSlice.connectedUser);
+    const user = useSelector((state) => state.userSlice.connectedUser);
 
     const [data, setData] = useState({
         description: '',
@@ -56,10 +56,10 @@ function Programmer() {
 
     const handleSeeProgramCalendar = async () => {
         try {
-            const profession = {
-                professionnel: 'admin@gmail.com'
+            const professionnel = {
+                professionnel: user.email
             }
-            await dispatch(voirCalendrierPro(profession)).unwrap();
+            await dispatch(voirCalendrierPro(professionnel)).unwrap();
             navigate(`/listRdvProgramme`);
         } catch (error) {
             console.error(error);

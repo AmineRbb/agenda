@@ -38,9 +38,6 @@ function Agenda() {
                 <thead>
                   <tr>
                     <th>
-                      <h6>Nom</h6>
-                    </th>
-                    <th>
                       <h6>Client</h6>
                     </th>
                     <th>
@@ -50,17 +47,19 @@ function Agenda() {
                       <h6>Date</h6>
                     </th>
                     <th>
-                      <h6>Durée</h6>
+                      <h6>Durée (minutes)</h6>
                     </th>
                     <th>
                       <h6>Type de Rendez-Vous</h6>
+                    </th>
+                    <th>
+                      <h6>Annuler le Rendez-Vous</h6>
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredRdvList.map((rdv) => (
                     <tr key={rdv.rdvId}>
-                      <td>{rdv.nameRdv}</td>
                       <td>{rdv.client}</td>
                       <td>{rdv.professionnel}</td>
                       <td>{format(new Date(rdv.dateDuRendezVous), "EEEE dd/MM/yyyy HH:mm")}</td>

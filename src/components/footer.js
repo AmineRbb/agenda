@@ -1,10 +1,11 @@
 import React from 'react'
+import "./footer.css";
 
 function Footer() {
     return (
-        <div>
-            <h6>By High-Computing</h6>
-            <p>32 rue Chaillon, Villeneuve la Garenne</p>
+        <div className="footer">
+            
+            <p>By <span class="logo">High Computing,</span> 32 rue Chaillon, Villeneuve la Garenne &nbsp;</p>
         </div>
     )
 }

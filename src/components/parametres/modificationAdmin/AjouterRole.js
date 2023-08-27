@@ -13,10 +13,29 @@ function AjouterRole() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const roles = ['Administrateur', 'Client', 'Professionnel'];
+
+  const changementNomRole = (role) => {
+    let infoFinal = "";
+    {
+
+      if (role.name === "Administrateur") {
+        infoFinal = "ADMIN";
+      }
+      if (role.name === "Professionnel") {
+        infoFinal = "PRO";
+      }
+      if (role.name === "Client") {
+        infoFinal = "CLIENT";
+      }
+    };
+    return infoFinal;
+  };
+
   const handleAddRole = async () => {
     try {
       const dto = {
-        role: `${data.role}`,
+        role: `${changementNomRole(data.role)}`,
         userParam: `${data.utilisateur}`
       }
 
@@ -48,11 +67,20 @@ function AjouterRole() {
                 </tr>
                 <tr>
                   <td>Role</td>
-                  < td><input
-                    value={data.role}
-                    className="form-control"
-                    onChange={(e) => setData({ ...data, role: e.target.value })}
-                  ></input></td>
+                  <td>
+                    <select
+                      value={data.role}
+                      className="form-control"
+                      onChange={(e) => setData({ ...data, role: e.target.value })}
+                    >
+                      <option value="">Sélectionner un rôle</option>
+                      {roles.map((role) => (
+                        <option key={role} value={role}>
+                          {role}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
                 </tr>
               </tbody>
             </table>

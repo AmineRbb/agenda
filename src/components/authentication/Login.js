@@ -43,7 +43,7 @@ const Login = () => {
   return (
     <div className="p-1 m-1">
       <div className="card">
-        <div className="card-body" style={{ minWidth: '150 rem', marginLeft: '100px', marginRight: '100px' }}>
+        <div className="card-body" style={{ minWidth: '150 rem', marginLeft: '100px', marginRight: '100px' } }>
           <h6 className="text-center">Veuilliez entrer vos identifiants </h6>
           <table className="table table-light">
             <tbody>
@@ -81,7 +81,7 @@ const Login = () => {
             </h6>
           </div>
           <div className="card">
-            <div className="card-body bg-light">
+            <div className="card-body bg-light"   style ={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
               <div className="col-lg-6">
                 <h6 className="text-center">Je n'ai pas de compte :</h6>
                 <h6 className="text-center">

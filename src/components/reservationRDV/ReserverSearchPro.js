@@ -27,49 +27,6 @@ function ReserverSearchPro() {
 
   };
 
-  const generateAppointmentss = () => {
-    const appointments = [];
-
-    rdvSlice.calendarList.forEach((cal) => {
-      {
-        const appointment = {
-          id: cal.rdvId,
-          professionnel: cal.professionnel,
-          profession: cal.profession,
-          dureeRdv: cal.dureeRendezVous,
-          description: cal.description,
-          appointmentTime: new Date(startTime)
-        };
-        let startTime = cal.horaireDebut;
-        let endTime = cal.horaireFin;
-        const jourDebut = new Date(appointment.appointmentTime).getDay(); // Récupérer le jour de la semaine (0 - Dimanche, 1 - Lundi, ...)
-        if (!cal.jourDisponible[jourDebut]) {
-          while (startTime <= endTime) {
-            
-
-            // Filtrer les rendez-vous déjà réservés
-            const isAlreadyBooked = rdvSlice.rdvList.some((rdv) => {
-              return (
-                rdv.professionnel === appointment.professionnel &&
-                rdv.dateDuRendezVous === appointment.appointmentTime.getTime()
-              );
-            });
-
-            if (!isAlreadyBooked) {
-              appointments.push(appointment);
-            }
-
-            const newTime = startTime + cal.dureeRendezVous * 60 * 1000;
-            startTime = newTime; // Mettre à jour le temps avec la nouvelle valeur
-          }
-        }
-      }
-    });
-
-    return appointments;
-  };
-
-
   const generateAppointments = () => {
     const appointments = [];
     rdvSlice.calendarList.forEach((cal) => {
@@ -90,7 +47,7 @@ function ReserverSearchPro() {
           jourDebut.setHours(heureDebut);
           jourDebut.setMinutes(minuteDebut);
 
-          while (jourDebut <= finJourDebut) {
+          while (jourDebut <= (finJourDebut - (cal.dureeRendezVous * 60 * 1000))) {
             const appointment = {
               id: cal.rdvId,
               professionnel: cal.professionnel,
@@ -118,7 +75,7 @@ function ReserverSearchPro() {
           }
         }
         const newTime = jourDebut.getTime() + 24 * 60 * 60 * 1000; // Ajouter un jour
-            jourDebut = new Date(newTime); // Mettre à jour jourDebut pour passer au jour suivant
+        jourDebut = new Date(newTime); // Mettre à jour jourDebut pour passer au jour suivant
       }
 
     });
@@ -127,6 +84,20 @@ function ReserverSearchPro() {
   }
 
   const availableAppointments = generateAppointments();
+
+  const formatAppointmentTime = (dateTime) => {
+    const options = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: false, // Utilise le format 24 heures
+    };
+
+    return new Intl.DateTimeFormat('fr-FR', options).format(dateTime);
+  };
+
 
   return (
     <div className="p-1 m-1">
@@ -161,7 +132,7 @@ function ReserverSearchPro() {
                       <td>{appointment.professionnel}</td>
                       <td>{appointment.profession}</td>
                       <td>{appointment.description}</td>
-                      <td>{appointment.appointmentTime.toLocaleString()}</td>
+                      <td>{formatAppointmentTime(appointment.appointmentTime)}</td>
                       <td>
                         <button
                           onClick={() => handleAddRdv(appointment)}
