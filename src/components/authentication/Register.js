@@ -21,7 +21,6 @@ function Register() {
 
     const handleSignup = async () => {
         try {
-
             const [day, month, year] = data.dateOfBirth.split("/");
             const realDateOfBirth = new Date(year, month - 1, day);
             const updatedData = { ...data, dateOfBirth: realDateOfBirth };
@@ -117,13 +116,13 @@ function Register() {
                             </tr>
                         </tbody>
                     </table>
-
-                    <h6 className="text-center">
+                    <div className="text-center">
                         <button
                             onClick={handleSignup}
                             className="btn btn-outline-secondary">
                             <FontAwesomeIcon icon={faCircleCheck}></FontAwesomeIcon> S'inscrire
-                        </button></h6>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -7,33 +7,30 @@ import { useDispatch } from 'react-redux';
 
 function SupprimerRole() {
   const [data, setData] = useState({
-    utilisateur:'',
-    role:'',
+    utilisateur: '',
+    role: '',
   });
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const roles = ['Administrateur', 'Client', 'Professionnel'];
 
   const changementNomRole = (role) => {
     let infoFinal = "";
-    
-      if (role === "Administrateur") {
-        infoFinal = "ADMIN";
-      }
-      else if (role === "Professionnel") {
-        infoFinal = "PRO";
-      }
-      else if (role === "Client") {
-        infoFinal = "CLIENT";
-      }
-      else {
-        console.error("type utilisateur inconnu");
-      }
-  
+    if (role === "Administrateur") {
+      infoFinal = "ADMIN";
+    }
+    else if (role === "Professionnel") {
+      infoFinal = "PRO";
+    }
+    else if (role === "Client") {
+      infoFinal = "CLIENT";
+    }
+    else {
+      console.error("type utilisateur inconnu");
+    }
     return infoFinal;
   };
-
 
   const handleDeleteRole = async () => {
     try {
@@ -89,11 +86,11 @@ function SupprimerRole() {
                 </tr>
               </tbody>
             </table>
-            <h6 className="text-center">
-               <button onClick={handleDeleteRole} className="btn btn-outline-secondary">
-          <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon> Soumettre
-          </button>
-          </h6>
+            <div className="text-center">
+              <button onClick={handleDeleteRole} className="btn btn-outline-secondary">
+                <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon> Soumettre
+              </button>
+            </div>
           </div>
         </div>
       </div>

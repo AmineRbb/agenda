@@ -8,17 +8,17 @@ function ParametrerAdmin() {
     <div className="p-1 m-1">
       <div className="card">
         <div className="card-body">
-          <h3 className="text-center">Paramètres Administrateur</h3>
-          <h6> Modifier des éléments des utilisateurs comme les roles voir supprimer des utilisateurs</h6>
+          <h3 className="text-center">Paramètres Administrateurs</h3>
+          <h6> Modifier les informations des utilisateurs de Meetings</h6>
           <button 
           onClick={() => navigate(`/admin/ajouterRole`)}
           className="customam btn btn-outline-secondary">
-            Ajouter un Role
+            Ajouter un Rôle
           </button><br/> <br/>
           <button 
           onClick={() => navigate(`/admin/supprimerRole`)}
           className="customam btn btn-outline-secondary">
-            Supprimer un Role
+            Supprimer un Rôle
           </button> <br/> <br/>
           <button 
           onClick={() => navigate(`/admin/supprimerUtilisateur`)}

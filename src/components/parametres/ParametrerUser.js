@@ -17,8 +17,6 @@ function ParametrerUser() {
 
   const recupRoles = (roles) => {
     let infoFinal = "";
-    {
-
       if (roles.name === "ADMIN") {
         infoFinal = "Administrateur";
       }
@@ -28,7 +26,6 @@ function ParametrerUser() {
       if (roles.name === "CLIENT") {
         infoFinal = "Client";
       }
-    };
     return infoFinal;
   };
 
@@ -70,7 +67,7 @@ function ParametrerUser() {
                     <td>{users.city}</td>
                   </tr>
                   <tr>
-                    <td>Roles</td>
+                    <td>Rôle(s)</td>
                     {roles.map((rol) => (
                       <tr key={rol.id}>
                         <td>{recupRoles(rol)}</td>
@@ -82,7 +79,9 @@ function ParametrerUser() {
 
               <h6> Modifier{' '} <button onClick={() => navigate(`/modifierUser`)} className="btn btn-outline-secondary">
                 <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
-              </button></h6></div>
+              </button>
+              </h6>
+            </div>
           ) : (<p>Chargement des données ...</p>)}
         </div>
       </div>

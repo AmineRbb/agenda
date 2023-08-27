@@ -17,7 +17,6 @@ function SupprimerUtilisateur() {
       const dto = {
         userParam: `${data.utilisateur}`
       }
-
       await dispatch(deleteUser(dto)).unwrap();
       navigate(`/infoModifier`);
     }

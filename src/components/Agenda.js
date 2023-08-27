@@ -1,6 +1,6 @@
-import { faMagnifyingGlass, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { deleteRdv, getAllRdv } from '../redux/slices/rdv';
 import { useDispatch, useSelector } from 'react-redux';

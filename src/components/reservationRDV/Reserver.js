@@ -45,13 +45,13 @@ function Reserver() {
     <div className="p-1 m-1">
   <div className="card">
     <div className="card-body">
-      <h5>Cherchez un rendez-vous en fonction de ce que vous recherchez</h5>
+      <h5>Cherchez un rendez-vous en fonction de vos besoins</h5>
       <div>
         <table style={{ width: '100%' }}>
           <tbody>
             <tr>
               <td style={{ verticalAlign: 'middle'}}>
-                <h6>Chercher un domaine de profession</h6>
+                <h6>Domaine de profession</h6>
               </td>
               <td style={{ width: '100%', paddingRight: '10px' }}>
                 <div className="d-flex align-items-center">
@@ -69,7 +69,7 @@ function Reserver() {
             </tr>
             <tr>
               <td style={{ verticalAlign: 'middle' }}>
-                <h6>Chercher un professionnel</h6>
+                <h6>Professionnel</h6>
               </td>
               <td style={{ width: '100%', paddingRight: '10px' }}>
                 <div className="d-flex align-items-center">

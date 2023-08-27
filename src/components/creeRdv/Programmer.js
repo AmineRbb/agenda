@@ -108,7 +108,7 @@ function Programmer() {
                                         ></input></td>
                                     </tr>
                                     <tr>
-                                        <td>Date Début des Rendez-Vous</td>
+                                        <td>Date de Début des Rendez-Vous (../../..)</td>
                                         <td><input
                                             value={data.jourDebut}
                                             className="form-control"
@@ -116,7 +116,7 @@ function Programmer() {
                                         ></input></td>
                                     </tr>
                                     <tr>
-                                        <td>Date Fin des Rendez-Vous</td>
+                                        <td>Date de Fin des Rendez-Vous (../../..)</td>
                                         <td><input
                                             value={data.jourFin}
                                             className="form-control"
@@ -124,7 +124,7 @@ function Programmer() {
                                         ></input></td>
                                     </tr>
                                     <tr>
-                                        <td>Heure début d'une journée</td>
+                                        <td>Heure de Début d'une Journée</td>
                                         <td><input
                                             value={data.heureDebut}
                                             className="form-control"
@@ -132,7 +132,7 @@ function Programmer() {
                                         ></input></td>
                                     </tr>
                                     <tr>
-                                        <td>Minute début d'une journée</td>
+                                        <td>Minute de Début d'une Journée</td>
                                         <td><input
                                             value={data.minuteDebut}
                                             className="form-control"
@@ -140,7 +140,7 @@ function Programmer() {
                                         ></input></td>
                                     </tr>
                                     <tr>
-                                        <td>Heure fin d'une journée</td>
+                                        <td>Heure de Fin d'une Journée</td>
                                         <td><input
                                             value={data.heureFin}
                                             className="form-control"
@@ -148,7 +148,7 @@ function Programmer() {
                                         ></input></td>
                                     </tr>
                                     <tr>
-                                        <td>Minute fin d'une journée</td>
+                                        <td>Minute de Fin d'une Journée</td>
                                         <td><input
                                             value={data.minuteFin}
                                             className="form-control"
@@ -176,14 +176,15 @@ function Programmer() {
                                     </tr>
                                 </tbody>
                             </table>
-
                             <div className="text-center">
                                 <button
                                     onClick={handleCreateCalendar}
                                     className="btn btn-outline-secondary">
                                     Programmer des Disponibilités
                                     <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon>
-                                </button></div></div>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

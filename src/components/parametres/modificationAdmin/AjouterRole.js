@@ -29,7 +29,6 @@ function AjouterRole() {
     else {
       console.error("type utilisateur inconnu");
     }
-
     return infoFinal;
   };
 
@@ -39,7 +38,6 @@ function AjouterRole() {
         role: `${changementNomRole(data.role)}`,
         userParam: `${data.utilisateur}`
       }
-
       await dispatch(addRole(dto)).unwrap();
       navigate(`/infoModifier`);
     } catch (error) {
@@ -47,7 +45,6 @@ function AjouterRole() {
       navigate(`/notAuthorized`);
     }
   }
-
 
   return (
     <div className="p-1 m-1">

@@ -11,7 +11,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function ListCalendarProgrammer() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.userSlice);
   const rdvSlice = useSelector((state) => state.rdvSlice);
 
   const generateRdv = () => {
@@ -48,9 +47,7 @@ function ListCalendarProgrammer() {
     }
   }
 
-
   return (
-
     <div className="p-1 m-1">
       <div className="card">
         <div className="card-body">
@@ -115,27 +112,3 @@ function ListCalendarProgrammer() {
 }
 
 export default ListCalendarProgrammer
-
-
-/* <th>
-                  <h6>Jour Début</h6>
-                </th>
-                <th>
-                  <h6>Jour Fin</h6>
-                </th>
-                <th>
-                  <h6>Heure Début</h6>
-                </th>
-                <th>
-                  <h6>Heure Fin</h6>
-                </th>
-                <th>
-                  <h6>Minute Début</h6>
-                </th>
-                <th>
-                  <h6>Minute Fin</h6>
-                </th>
-                                <th>
-                  <h6>Jours Disponibles</h6>
-                </th>
-                */

@@ -68,7 +68,7 @@ function Header() {
                 to="/reserverRdv"
                 className="custom-title btn btn-outline-info ms-1"
               >
-                Reserver
+                Réserver
               </Link>
             </li>
             {isPro && (

@@ -44,7 +44,7 @@ const Login = () => {
     <div className="p-1 m-1">
       <div className="card">
         <div className="card-body" style={{ minWidth: '150 rem', marginLeft: '100px', marginRight: '100px' } }>
-          <h6 className="text-center">Veuilliez entrer vos identifiants </h6>
+          <h6 className="text-center">Veuillez entrer vos identifiants </h6>
           <table className="table table-light">
             <tbody>
               <tr>
