@@ -33,9 +33,9 @@ function Home() {
           </h6>
           <br /><br /><br /><br />
           <h6>Êtes vous un professionnel dans un domaine?</h6>
-          <p>Vous pouvez utiliser Meetings afin de gerer vos rendez-vous avec vos clients. Vous pouvez
+          <p>Vous pouvez utiliser Meetings afin de gérer vos rendez-vous avec vos clients. Vous pouvez
             libérer du temps avec une gestion de vos rendez-vous beaucoup plus rapide et moderne.
-            Vous pouvez améliorer l'accès à votre pratique professionnel quelle que soit le métier
+            Vous pouvez améliorer l'accès à votre pratique professionnel quel que soit le métier
             et ainsi gagner en confort de travail.
           </p>
         </div>

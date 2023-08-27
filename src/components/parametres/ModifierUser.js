@@ -36,12 +36,30 @@ function ModifierUser() {
         }
     }
 
+  const changementNomRole = (role) => {
+    let infoFinal = "";
+    if (role === "ADMIN") {
+      infoFinal = "Administrateur";
+    }
+    else if (role === "PRO") {
+      infoFinal = "Professionnel";
+    }
+    else if (role === "USER") {
+      infoFinal = "Client";
+    }
+    else {
+      console.error("type utilisateur inconnu");
+    }
+
+    return infoFinal;
+  };
+
     return (
         <div className="card">
             <div className="card-body">
                 {data ? (
                     <div>
-                        <h3 className="text-center">Modifier les Informations Utilisateur de {data.email} </h3>
+                        <h3 className="text-center">Modifier les informations utilisateur de {data.email} </h3>
                         <table className="table table-light">
                             <tbody>
                                 <tr>
@@ -49,12 +67,14 @@ function ModifierUser() {
                                     <td>{data.email}</td>
                                 </tr>
                                 <tr>
-                                    <td>Roles</td>
+                                    <td>Rôle(s)</td>
+                                    <td>
                                     {roles.map((rol) => (
-                                        <tr key={rol.id}>
-                                            <td>{rol.name}</td>
-                                        </tr>
+                                        <p key={rol.id}>
+                                            <p>{changementNomRole(rol.name)}</p>
+                                        </p>
                                     ))}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Prénom</td>
@@ -107,11 +127,11 @@ function ModifierUser() {
                             </tbody>
                         </table>
 
-                        <div><h6> Modifier Les informations utilisateur </h6>
+                        <div  style ={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                             <button
                                 onClick={handleModif}
                                 className="btn btn-outline-secondary">
-                                <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
+                                <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon> Modifier
                             </button>
                         </div>
                     </div>

@@ -37,7 +37,7 @@ function Register() {
     return (
         <div className="card">
             <div className="card-body">
-                <h3 className="text-center">Créez votre compte DocPuting en entrant les informations :</h3>
+                <h3 className="text-center">Créez votre compte Meetings :</h3>
                 <div>
                     <table className="table table-light">
                         <tbody>
@@ -84,7 +84,7 @@ function Register() {
                                 ></input></td>
                             </tr>
                             <tr>
-                                <td>Date de naissance</td>
+                                <td>Date de naissance (../../....)</td>
                                 <td><input
                                     value={data.dateOfBirth}
                                     className="form-control"

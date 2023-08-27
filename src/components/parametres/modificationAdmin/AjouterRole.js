@@ -17,18 +17,19 @@ function AjouterRole() {
 
   const changementNomRole = (role) => {
     let infoFinal = "";
-    {
+    if (role === "Administrateur") {
+      infoFinal = "ADMIN";
+    }
+    else if (role === "Professionnel") {
+      infoFinal = "PRO";
+    }
+    else if (role === "Client") {
+      infoFinal = "CLIENT";
+    }
+    else {
+      console.error("type utilisateur inconnu");
+    }
 
-      if (role.name === "Administrateur") {
-        infoFinal = "ADMIN";
-      }
-      if (role.name === "Professionnel") {
-        infoFinal = "PRO";
-      }
-      if (role.name === "Client") {
-        infoFinal = "CLIENT";
-      }
-    };
     return infoFinal;
   };
 
@@ -53,7 +54,7 @@ function AjouterRole() {
       <div className="card">
         <div className="card-body">
           <h3 className="text-center"> Ajouter un role à un Utilisateur :</h3>
-          <h6 className="text-center"> Veuilliez choisir le role ainsi que l'utilisateur de votre choix.</h6>
+          <h6 className="text-center"> Choisissez le rôle à ajouter et l'utilisateur concerné</h6>
           <div>
             <table className="table table-light">
               <tbody>

@@ -50,7 +50,7 @@ function ReserverSearchPro() {
           while (jourDebut <= (finJourDebut - (cal.dureeRendezVous * 60 * 1000))) {
             const appointment = {
               id: cal.rdvId,
-              professionnel: cal.professionnel,
+              professionnel: cal.userDto.email? cal.userDto.email : '',
               profession: cal.profession,
               dureeRdv: cal.dureeRendezVous,
               description: cal.description,
@@ -61,8 +61,8 @@ function ReserverSearchPro() {
             const isAlreadyBooked = rdvSlice.rdvList.some((rdv) => {
               return (
                 rdv.professionnel === appointment.professionnel &&
-                rdv.dateDuRendezVous === appointment.appointmentTime.getTime()
-              );
+                (Math.abs(rdv.dateDuRendezVous - appointment.appointmentTime.getTime()) < 60 * 1000)
+                );
             });
 
             if (!isAlreadyBooked) {

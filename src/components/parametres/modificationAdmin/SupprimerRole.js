@@ -18,14 +18,17 @@ function SupprimerRole() {
   const changementNomRole = (role) => {
     let infoFinal = "";
     
-      if (role.name === "Administrateur") {
+      if (role === "Administrateur") {
         infoFinal = "ADMIN";
       }
-      if (role.name === "Professionnel") {
+      else if (role === "Professionnel") {
         infoFinal = "PRO";
       }
-      if (role.name === "Client") {
+      else if (role === "Client") {
         infoFinal = "CLIENT";
+      }
+      else {
+        console.error("type utilisateur inconnu");
       }
   
     return infoFinal;
@@ -54,8 +57,8 @@ function SupprimerRole() {
     <div className="p-1 m-1">
       <div className="card">
         <div className="card-body">
-          <h3 className="text-center"> Supprimer un role à un Utilisateur :</h3>
-          <h6 className="text-center"> Veuilliez choisir le role ainsi que l'utilisateur de votre choix.</h6>
+          <h3 className="text-center"> Supprimer un rôle à un Utilisateur :</h3>
+          <h6 className="text-center"> Choisissez le rôle à enlever et l'utilisateur concerné</h6>
           <div>
             <table className="table table-light">
               <tbody>

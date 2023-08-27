@@ -5,7 +5,7 @@ function InfoModifier() {
         <div className="p-1 m-1">
             <div className="card">
                 <div className="card-body">
-                    <h6>Vos informations Utilisateurs ont été mise à jour.</h6>
+                    <h6>Vos informations utilisateurs ont été mise à jour.</h6>
                 </div>
             </div>
         </div>

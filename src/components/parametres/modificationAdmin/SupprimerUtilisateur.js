@@ -33,7 +33,7 @@ function SupprimerUtilisateur() {
       <div className="card">
         <div className="card-body">
           <h3 className="text-center"> Supprimer un Utilisateur :</h3>
-          <h6 className="text-center"> Veuilliez choisir l'utilisateur de votre choix.</h6>
+          <h6 className="text-center"> Choisissez un utilisateur.</h6>
           <div>
             <table className="table table-light">
               <tbody>

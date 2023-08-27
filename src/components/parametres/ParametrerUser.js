@@ -20,13 +20,13 @@ function ParametrerUser() {
     {
 
       if (roles.name === "ADMIN") {
-        infoFinal = "administrateur";
+        infoFinal = "Administrateur";
       }
       if (roles.name === "PRO") {
-        infoFinal = "professionnel";
+        infoFinal = "Professionnel";
       }
       if (roles.name === "CLIENT") {
-        infoFinal = "client";
+        infoFinal = "Client";
       }
     };
     return infoFinal;
@@ -42,7 +42,7 @@ function ParametrerUser() {
               <table className="table table-light">
                 <tbody>
                   <tr>
-                    <td>email</td>
+                    <td>Email</td>
                     <td>{users.email}</td>
                   </tr>
                   <tr>

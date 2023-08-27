@@ -21,7 +21,7 @@ function Programmer() {
         minuteDebut: '',
         minuteFin: '',
         dureeRdv: '',
-        jourDisponible: [true, true, true, true, true, false, false],
+        jourDisponible: [false, true, true, true, true, true, false],
     });
 
     const handleCreateCalendar = async () => {
@@ -78,7 +78,7 @@ function Programmer() {
             <div className="p-1 m-1">
                 <div className="card">
                     <div className="card-body">
-                        <h6>Voir les disponibilités déjà programmer</h6>
+                        <h6>Voir les disponibilités déjà programmée</h6>
                         <div className="text-center">
                             <button
                                 onClick={(handleSeeProgramCalendar)}
@@ -86,7 +86,7 @@ function Programmer() {
                                 <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon>
                             </button></div>
                         <br /><br />
-                        <h6>Programmer une plage de rendez-vous disponible pour vos clients</h6>
+                        <h6>Programmer une plage de disponibilité pour vos clients</h6>
 
                         <div>
                             <table className="table table-light">
@@ -116,22 +116,6 @@ function Programmer() {
                                         ></input></td>
                                     </tr>
                                     <tr>
-                                        <td>Heure Début des Rendez-Vous</td>
-                                        <td><input
-                                            value={data.heureDebut}
-                                            className="form-control"
-                                            onChange={(e) => setData({ ...data, heureDebut: e.target.value })}
-                                        ></input></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Minute du Début des Rendez-Vous</td>
-                                        <td><input
-                                            value={data.minuteDebut}
-                                            className="form-control"
-                                            onChange={(e) => setData({ ...data, minuteDebut: e.target.value })}
-                                        ></input></td>
-                                    </tr>
-                                    <tr>
                                         <td>Date Fin des Rendez-Vous</td>
                                         <td><input
                                             value={data.jourFin}
@@ -140,7 +124,23 @@ function Programmer() {
                                         ></input></td>
                                     </tr>
                                     <tr>
-                                        <td>Heure de Fin des Rendez-Vous</td>
+                                        <td>Heure début d'une journée</td>
+                                        <td><input
+                                            value={data.heureDebut}
+                                            className="form-control"
+                                            onChange={(e) => setData({ ...data, heureDebut: e.target.value })}
+                                        ></input></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Minute début d'une journée</td>
+                                        <td><input
+                                            value={data.minuteDebut}
+                                            className="form-control"
+                                            onChange={(e) => setData({ ...data, minuteDebut: e.target.value })}
+                                        ></input></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Heure fin d'une journée</td>
                                         <td><input
                                             value={data.heureFin}
                                             className="form-control"
@@ -148,7 +148,7 @@ function Programmer() {
                                         ></input></td>
                                     </tr>
                                     <tr>
-                                        <td>Minute de Fin des Rendez-Vous</td>
+                                        <td>Minute fin d'une journée</td>
                                         <td><input
                                             value={data.minuteFin}
                                             className="form-control"
@@ -164,7 +164,7 @@ function Programmer() {
                                         ></input></td>
                                     </tr>
                                     <tr>
-                                        {['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'].map((jour, index) => (
+                                        {['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'].map((jour, index) => (
                                             <button
                                                 key={jour}
                                                 onClick={() => handleSetDay(index)}
