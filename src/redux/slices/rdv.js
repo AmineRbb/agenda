@@ -50,7 +50,7 @@ export const reserveRdv = createAsyncThunk('reserveRdv', async (dto) => {
     Authorization: `Bearer ${token}`,
   };
   const request = {
-    nameRdv: dto.id,
+    nameRdv: dto.appointment.id + dto.mailUtilisateur + dto.professionnel + Math.random().toString(),
     client: dto.mailUtilisateur,
     professionnel: dto.appointment.professionnel,
     dateDuRendezVous: dto.appointment.appointmentTime,

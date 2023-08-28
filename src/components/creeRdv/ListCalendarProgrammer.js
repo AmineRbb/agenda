@@ -22,8 +22,8 @@ function ListCalendarProgrammer() {
       const dateFinvar = moment(cal.horaireFin).format('YYYY-MM-DD');
       let rdvRajouterAList = {
         rdvId: cal.rdvId,
-        profession: cal.userDto.professionnel,
-        dureeRendezVous: cal.dureeRdv,
+        profession: cal.profession,
+        dureeRendezVous: cal.dureeRendezVous,
         horaireDebut: horaireDebutvar,
         horaireFin: horaireFinvar,
         dateDebut: dateDebutvar,
